@@ -1,7 +1,7 @@
 //106.14.133.233
 //127.0.0.1
-const IPCONFIG='http://127.0.0.1:8080/icehoc/';//全局iP地址url verificationCode
-//const IPCONFIG='http://106.14.133.233:8080/icehoc/';//全局iP地址url verificationCode
+//const IPCONFIG='http://127.0.0.1:8080/icehoc/';//全局iP地址url verificationCode
+const IPCONFIG='http://106.14.133.233:8080/icehoc/';//全局iP地址url verificationCode
 const VERIFICATIONCODE=IPCONFIG+'';//获取验证码
 const LOGIN_API=IPCONFIG+'LoginServlet';// login api url
 const ISLOGIN_NAME='isLogin';//登陆之后设置的名称
