@@ -16,7 +16,7 @@ $(function() {
 		var data = {
 			gender : gender
 		};
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		jump(GENDERURL, data);
 	}
 });
