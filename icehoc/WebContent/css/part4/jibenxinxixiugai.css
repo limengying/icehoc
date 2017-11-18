@@ -1,0 +1,75 @@
+.content{
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.xinxi{
+	height: 80%;
+}
+
+
+.change_image{
+	color: white;
+}
+
+.uploadImg{ 
+	width: 50%;
+	margin: auto;
+
+}
+
+.image{
+	position: relative;
+	left:30%;
+	size:30%;
+}
+
+
+.touxiang{ 
+	height:20% ;
+	position:absolute; 
+	z-index:1; 
+    margin: auto;
+	opacity:0;
+	filter:alpha(opacity=0); 
+}
+
+.content_div{
+	display: flex;
+	color: white;
+	margin: 2%;
+}
+
+.content_div_left{
+	width: 30%;
+	margin: 1% 0;
+}
+
+.content_div_right{
+	width: 70%;
+	margin: 1% 0;
+}
+
+.select_div{
+	width: 100%;
+}
+
+
+.submitBtn{
+	width: 20%;
+	margin-left: 80%;
+	margin-top: 3%;
+}
+
+.weight{
+	width: 100%;
+}
+
+.height{
+	width: 100%;
+}
+
+.time{
+	width: 100%;
+}

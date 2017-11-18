@@ -1,0 +1,33 @@
+.content{
+	width: 90%;
+	margin: auto;
+}
+
+.search_b{
+	width: 20%;
+	margin-left: 80%;
+}
+
+.submitBtn{
+	width: 100%;
+	padding: 7%;
+}
+
+
+.text{
+	font-size: 2rem;
+	color: #FFFFFF;
+	text-shadow:white !important;
+}
+
+
+#new_btn{
+	margin-top: 50%;
+	
+}
+
+.button1{
+	padding:2.5%;
+	width: 100%;
+
+}

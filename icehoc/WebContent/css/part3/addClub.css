@@ -1,0 +1,31 @@
+.allpage{
+	color:white
+}
+
+.content_div{
+	margin: 2%;
+	display: flex;
+}
+
+.content_div_left{
+	width: 30%;
+}
+
+.content_div_right{
+	width: 70%;
+}
+
+.content_div_right input{
+	width: 95%;
+}
+
+.content_div_right textarea{
+	width: 95%;
+}
+
+.submitBtn{
+	width: 20%;
+	margin-left: 75%;
+
+}
+

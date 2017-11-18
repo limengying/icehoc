@@ -1,0 +1,89 @@
+/*搜索框*/
+
+.search_a{
+	width:90%;
+	margin: auto;	
+	display:flex;
+	height:6%;
+	margin-top:2%;
+}
+
+.search_c{
+	float: left;
+	height：100%；
+		
+}
+
+.submitBtn1{
+	
+}
+
+.search_b{
+	float: left;
+	width: 70%;
+	margin:0 2%
+}
+
+.search{
+	width:100%;
+	
+}
+
+.search_d{
+	float: left;
+	
+
+}
+
+.submitBtn{
+	
+}
+/*搜索框*/
+
+/*导航栏*/
+.navbar{
+	display: flex;
+	margin-top: 3%;
+}
+
+.navbar div{
+	width: 100%;
+	text-align: center;
+	background: whitesmoke;
+}
+
+/*导航栏下面的内容*/
+.all{
+	height: 63%;
+	width: 100%;
+	padding:0rem!important;
+	overflow: auto;
+}
+
+.everyone{
+	
+	background:whitesmoke ;
+	border-style:solid; 
+	border-width:1px; 
+	border-color:#000;
+	margin: 0rem!important;
+	padding:1rem;
+}
+
+.everyone div{
+	margin: 2%;
+}
+
+.name{
+	font-size:2rem;
+	
+}
+
+.introduce{
+	font-size:1.8rem;
+}
+
+/*导航栏下面的内容*/
+
+
+

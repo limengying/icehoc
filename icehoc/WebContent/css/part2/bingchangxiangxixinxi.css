@@ -1,0 +1,27 @@
+.logo{
+	width:65%;
+	margin: auto;
+	margin-top: 5%;
+	
+}
+
+.logo img{
+	width: 100%;
+
+}
+
+.all{
+	display: flex;
+	flex-direction: column;
+	height:60% ;
+	width: 95%;
+	padding:0rem!important;
+	overflow: auto;
+	margin: auto;
+	margin-top: 2%;
+	color:white;
+}
+
+.all div{
+	margin:2%;
+}

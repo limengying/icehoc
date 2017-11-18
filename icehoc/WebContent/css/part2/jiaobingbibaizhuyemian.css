@@ -1,0 +1,91 @@
+
+.all{
+	display: flex;
+	flex-direction: column;
+	height:75% ;
+	width: 95%;
+	padding:0rem!important;
+
+	margin: auto;
+	margin-top: 2%;
+}
+
+
+
+.everyone{ 
+	background:whitesmoke ;
+	border-style:solid; 
+	border-width:1px; 
+	border-color:#000;
+	margin: 0.5rem!important;
+	padding:1%;
+}
+
+.everyone div{
+	margin: 1%;
+}
+
+
+
+.content_left{
+	width:20%;
+}
+
+
+.content_right{
+	width:80%;
+}
+
+.content_right div{
+	margin: 2%;
+}
+
+.place{
+	display: flex;
+}
+
+.img img{
+	height: 5rem;
+	width: 5rem;
+	margin-top: 30%;
+}
+/*搜索框*/
+
+.search_a{
+	width:90%;
+	margin: auto;	
+	display:flex;
+	height:6%;
+	margin-top:2%;
+}
+
+.search_c{
+	float: left;
+	height：100%；
+		
+}
+
+.submitBtn1{
+	
+}
+
+.search_b{
+	float: left;
+	width: 70%;
+	margin:0 2%
+}
+
+.search{
+	width:100%;
+	
+}
+
+.search_d{
+	float: left;
+	
+
+}
+
+.submitBtn{
+	
+}

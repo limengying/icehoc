@@ -1,0 +1,39 @@
+.allpage{
+	min-height: 0;
+}
+
+.content{
+	height: 78%;
+	color: white;
+	overflow: auto;
+	min-height: 0;
+
+}
+
+.content_div{
+	margin: 2%;
+	display: flex;
+}
+
+.content_div_left{
+	width: 40%;
+}
+
+.content_div_right{
+	width: 60%;
+}
+
+.content_div_right input{
+	width: 95%;
+}
+
+.content_div_right select{
+	width: 95%;
+}
+
+.submitBtn{
+	width: 20%;
+	margin-left: 75%;
+
+}
+

@@ -1,0 +1,70 @@
+.back{
+	width: 30%;
+	height: 5%;
+	float: left;
+}
+
+.back img{
+    width: 15%;
+    margin-left:20% ;
+    margin-top:-1% ;
+}
+
+.biaoti{
+	float:left;
+	height: 5%;
+	width:45%;
+	font-size:3rem!important;
+	text-align: center;	
+}
+
+.jiechubingding{
+	float: right;
+	width: 25%;
+	height: 5%;
+}
+  
+.jiechu{
+	height: 100%;
+	
+}
+
+.shujv{
+	height: 70%;
+}
+
+.shujv div{
+	background: whitesmoke;
+	margin:3%;
+	
+}
+
+.top_div{
+	display: flex;
+}
+
+
+.top_div_left{
+	
+	width: 20%;
+}
+
+
+.image img{
+	width: 100%;
+}
+
+.top_div_right{
+	width: 70%;
+}
+
+.mid_div{
+	padding:2%;
+}
+
+.food_div{
+	padding:2%;
+	
+}
+
+

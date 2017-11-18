@@ -1,0 +1,83 @@
+.main{
+	background-image: url(../../img/part8/lock-screen-background.png);
+	background-size: 100% 100%;
+	height: 100%;
+	margin: 0 !important;
+	display: flex;	/*弹性布局，子元素的float失效*/
+	flex-direction: column;/*定义主轴竖，默认横*/
+	-webkit-flex-direction: column;/*伸缩容器的主轴的方向row row-reverse column column-reverse*/	
+    background-repeat:no-repeat;/*背景固定*/
+    background-attachment:fixed
+}
+.head{
+	color: white;
+	text-align: center;
+	font-size: 2rem;
+	margin-top: 3rem;
+	text-decoration: none;
+	font-family: "宋体";
+	text-shadow: none;
+}
+#saishigundong{
+	position:fixed;
+	left: 20%;
+	width:70%;
+	background: rgb(127,255,170);
+	text-shadow: none;
+	text-align: center;
+	height: 2rem%;
+}
+.head{
+	color: white;
+	text-align: center;
+	font-size: 2rem;
+	margin-top: 3rem;
+	text-decoration: none;
+	font-family: "宋体";
+	text-shadow: none;
+}
+.button1{
+	position: fixed;
+	left: 8%;
+	top: 6%;
+	
+}
+.button1 div{
+	margin: auto;
+	
+}
+
+.button{
+	background:rgb(163,163,163);
+	color:white;
+	display: flex;
+	position: fixed;
+	left: 0;
+  	bottom: 0px;
+  	padding: 0rem;/*这个div的内边距，可以去掉*/
+	width: 100%; 
+	height: 3.5rem;
+	
+	font-family:Microsoft YaHei!important;	
+	text-decoration: none!important;	
+}
+
+.button div{
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+.ch{
+	text-align: center;
+	font-size: 2.5rem;
+	font-family: "微软雅黑";
+	text-shadow:none;
+	
+}
+
+.en{
+	text-align: center;
+	font-size: 0.5rem;
+	font-family: "微软雅黑";
+	text-shadow:none;
+}

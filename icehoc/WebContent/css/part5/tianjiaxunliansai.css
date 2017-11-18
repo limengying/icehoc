@@ -1,0 +1,75 @@
+.content{
+	width:80%;
+	margin: auto;
+}
+
+
+.button3{
+	display: flex;
+	width:100%;
+	color:white;
+	margin-top: 8%;
+	height: 4%;
+
+}
+
+.time{
+    width: 80%;
+   margin: 0 2%;
+    height:2rem!important;
+	
+}
+
+.changdi{
+	 width: 80%;
+    margin: 0 2%;
+    
+	
+}
+
+/*对阵双方*/
+.button4{
+	width:100%;
+	color:white;
+	margin-top: 4%;
+}
+
+.button4 select{
+	 width: 80%;
+	 margin-left: 16%;
+}
+
+
+.vs{
+margin-top: 0.5rem;
+text-align: center;
+}
+
+/*备注*/
+.button5{
+	width:100%;
+	
+	color:white;
+	margin-top:4% ;
+	
+}
+
+
+
+
+/*确认*/
+.submitBtn{
+width: 20%;
+height: 5%;
+margin-left:77%;
+}
+
+.queren{
+
+margin: 3rem auto;
+}
+
+#beizhu{
+	width: 82%;
+	margin-left: 15%;
+}

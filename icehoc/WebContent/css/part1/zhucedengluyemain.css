@@ -1,0 +1,50 @@
+.main{
+	background-image: url(../../img/part1/login.png);
+	background-size: 100% 100%;
+	height: 100%;
+	margin: 0 !important;
+	display: flex;	/*弹性布局，子元素的float失效*/
+	flex-direction: column;/*定义主轴竖，默认横*/
+	-webkit-flex-direction: column;/*伸缩容器的主轴的方向row row-reverse column column-reverse*/	
+    background-repeat:no-repeat;/*背景固定*/
+    background-attachment:fixed
+}
+
+.btn { 
+	display: flex;
+	flex-direction: column;/*定义主轴竖，默认横*/
+    margin: 130% auto 2% auto;
+	
+}
+
+.button1{
+	width: 90%;
+	margin:0 auto;
+}
+
+
+.button1 img{
+ 	width: 100%;
+ 	margin:0 auto;
+	
+}
+
+.button2{
+	width: 90%;
+	margin:0 auto;
+}
+
+
+.button2 img{
+margin:0 auto;
+    width: 100%;
+	margin-top: 1rem;
+
+}
+
+.buttontwo span{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	margin: 2%;
+}
