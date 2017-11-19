@@ -97,7 +97,7 @@ $(".competitionAddtBtn").click(function() {
 	var data = {
 		operateType : "competitionAddtBtn"
 	};
-	 alert(JSON.stringify(data));
+	// alert(JSON.stringify(data));
 	jump(BINGTIANXUEDIURL, data);
 	//window.location.href = "addCompetition.jsp";
 });

@@ -42,7 +42,7 @@ $(function() {
 			allowedSlip : allowedSlip,
 			iceType : iceType
 		};
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		jump(JIAOBINGBIBAIURL, data);
 	});
 });

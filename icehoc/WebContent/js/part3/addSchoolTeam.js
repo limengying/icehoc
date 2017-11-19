@@ -26,7 +26,7 @@ $(function() {
 			schoolTeamConstruction : schoolTeamConstruction
 			
 		};
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		jump(BINGTIANXUEDIURL, data);
 	});
 });

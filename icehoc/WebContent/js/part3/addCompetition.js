@@ -41,7 +41,7 @@ $(function() {
 			remark : beizhu,
 			time : time
 		};
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		jump(BINGTIANXUEDIURL, data);
 	});
 });
