@@ -102,4 +102,45 @@ public class CompetitionDao {
 		return false;
 	}
 
+	public boolean insertReGUANFANG(String competitionName, int teamAId, int teamBId, int rinkId, String competitionTime,
+			String remark, boolean competitionType) {
+		String sql = "INSERT INTO competition (competitionName,teamAId,teamBId,rinkId,competitionTime,competitionType,remark) VALUES (?,?,?,?,?,?,?)";
+		try {
+			conn = util.openConnection();
+			preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, competitionName);
+			preparedStatement.setInt(2, teamAId);
+			preparedStatement.setInt(3, teamBId);
+			preparedStatement.setInt(4, rinkId);
+			preparedStatement.setString(5, competitionTime);
+			preparedStatement.setBoolean(6, competitionType);
+			preparedStatement.setString(7, remark);
+			int i = preparedStatement.executeUpdate();
+			if (i == 1) {
+				System.out.println("插入成功");
+				return true;
+			} else
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return false;
+	}
+
 }

@@ -89,7 +89,7 @@ public class BingLinChengXiaServlet extends HttpServlet {
 					int teamBId =Integer.parseInt(request.getParameter("teamBId"));
 					String remark =request.getParameter("remark");
 					String time=request.getParameter("time");
-					boolean f = competitionService.addCompetition(teamAId, teamBId, rinkId, time, remark);
+					boolean f = competitionService.addCompetition(teamAId, teamBId, rinkId, time, remark,false);//添加临时约赛
 					if(f){
 						duiKangs = duiKangService.getDuiKangs(user.getUserId());
 						session.setAttribute("duiKangs", duiKangs);

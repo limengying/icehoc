@@ -9,6 +9,16 @@ $(function() {
 		var buildTime = $("#buildTime").val();
 		var schoolTeamConstruction = $("#schoolTeamConstruction").val();
 
+		if (SchoolTeamName == "") {
+			alert("请输入校队名称！");
+			return false;
+		}
+
+		if (buildTime == "") {
+			alert("请输入校队建立时间");
+			return false;
+		}
+
 		var data = {
 			operateType : "tianjiaSchoolTeam",
 			SchoolTeamName : SchoolTeamName,
@@ -16,7 +26,7 @@ $(function() {
 			schoolTeamConstruction : schoolTeamConstruction
 			
 		};
-		//alert(JSON.stringify(data));
+		alert(JSON.stringify(data));
 		jump(BINGTIANXUEDIURL, data);
 	});
 });

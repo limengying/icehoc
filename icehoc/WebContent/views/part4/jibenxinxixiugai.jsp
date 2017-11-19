@@ -42,24 +42,31 @@
 					</div>
 				</div>
 
-				<!--身高-->
-
-				<div class="content_div">
-					<div class="content_div_left">身高：</div>
-					<div class="content_div_right">
-						<input type="text" name="height" class="height" id="height"
-							data-role='none' />
-					</div>
+<!--
+	<div class="content_div">
+					<div class="content_div_left">身高CM：</div>
+						<div data-role="fieldcontain" class="content_div_right">
+							<input type="range" name="points" id="points" value="160" min="120"
+								max="200" data-popup-enabled="true">
+						</div>
 				</div>
-
-				<!--体重-->
+-->
 				<div class="content_div">
-					<div class="content_div_left">体重：</div>
-					<div class="content_div_right">
-						<input type="text" name="weight" class="weight" id="weight"
-							data-role='none' />
-					</div>
+					<div class="content_div_left">身高CM：</div>
+						<div data-role="fieldcontain" class="b">
+							<input type="range" name="points" id="height" value="160" min="120"
+								max="200" data-popup-enabled="true">
+						</div>
 				</div>
+				
+				<div class="content_div">
+					<div class="content_div_left">体重KG：</div>
+						<div data-role="fieldcontain" class="b">
+							<input type="range" name="points" id="weight" value="65" min="35"
+							max="100" data-popup-enabled="true">
+						</div>
+				</div>
+				
 
 				<!--位置-->
 				<div class="content_div">

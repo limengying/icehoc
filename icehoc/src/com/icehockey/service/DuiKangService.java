@@ -6,14 +6,14 @@ import com.icehockey.dao.DuiKangDao;
 import com.icehockey.entity.DuiKang;
 
 public class DuiKangService {
-	DuiKangDao dao=new DuiKangDao();
-	
+	DuiKangDao dao = new DuiKangDao();
+
 	public List<DuiKang> getDuiKangs(int userId) {
 		return dao.getDuiKangsByUserId(userId);
 	}
 
 	public List<DuiKang> queryDuiKangsByNameString(String nameString) {
-		
+
 		return dao.getDuiKangsByNameString(nameString);
 	}
 
@@ -21,9 +21,13 @@ public class DuiKangService {
 		return dao.getDuiKangsGuanFang();
 	}
 
+	public List<DuiKang> getDuiKangsLINSHI() {
+		return dao.getDuiKangsLINSHI();
+	}
+
 	public DuiKang getDuiKangById(int id) {
 		return dao.getDuiKangById(id);
-		}
+	}
 
 	public List<DuiKang> getDuiKangsAll() {
 		return dao.getDuiKangsAll();

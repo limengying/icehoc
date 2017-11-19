@@ -233,7 +233,75 @@ public class DuiKangDao {
 		}
 		return duiKangs;
 	}
+	public List<DuiKang> getDuiKangsLINSHI() {
+		List<DuiKang> duiKangs = new ArrayList<DuiKang>();
+		String sql = "SELECT * FROM duikang WHERE competitionType=?";
+		System.out.println(sql);
+		try {
+			conn = util.openConnection();
+			preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setBoolean(1, false);
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
 
+				int id = rs.getInt("id");
+				String competitionName=rs.getString("competitionName");
+				int teamAId = rs.getInt("teamAId");
+				String clubAName = rs.getString("clubAName");
+				String clubALogo = rs.getString("clubALogo");
+				int teamBId = rs.getInt("teamBId");
+				String clubBName = rs.getString("clubBName");
+				String clubBLogo = rs.getString("clubBLogo");
+				boolean competitionType = rs.getBoolean("competitionType");
+				String remark = rs.getString("remark");
+				int rinkId = rs.getInt("rinkId");
+				Timestamp timestamp = rs.getTimestamp("pkDate");// 年月日星期几
+				String pkDate = null;
+				if (timestamp != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd EEEE");// 设置日期格式
+					pkDate = df.format(timestamp.getTime());
+				}
+				System.out.println("pkDate:"+pkDate);
+				timestamp = rs.getTimestamp("pkTime");// 年月日星期几
+				String pkTime = null;
+				if (timestamp != null) {
+					SimpleDateFormat df = new SimpleDateFormat("HH:mm");// 设置日期格式
+					pkTime = df.format(timestamp.getTime());
+				}
+				System.out.println("pkTime:"+pkTime);
+				int competitionDegreeId = rs.getInt("competitionDegreeId");
+				int round = rs.getInt("round");
+				String rinkName = rs.getString("rinkName");
+				String environmentalIndex = rs.getString("environmentalIndex");
+				String address = rs.getString("address");
+				int userId = rs.getInt("userId");
+				String competitionDegreeName = rs.getString("competitionDegreeName");
+				duikang=new DuiKang(id, competitionName, teamAId, clubAName, clubALogo, teamBId, clubBName, clubBLogo, competitionType, remark, rinkId, pkDate, pkTime, competitionDegreeId, round, rinkName, environmentalIndex, address, userId, competitionDegreeName);
+				System.out.println(duikang);
+				duiKangs.add(duikang);
+			}
+			return duiKangs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return duiKangs;
+	}
 	public DuiKang getDuiKangById(int id) {
 		String sql = "SELECT * FROM duikang WHERE id=?";
 		System.out.println(sql);

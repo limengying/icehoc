@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="../../css/part1/allpagesame.css" />
 <link rel="stylesheet"
 	href="../../css/jqueryMobile/jquery.mobile-1.4.5.min.css" />
-<link rel="stylesheet" href="../../css/part3/addClub.css" />
+<link rel="stylesheet" href="../../css/part5/tianjiaxunliansai.css" />
 <script src="../../js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../../js/jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
 </head>
@@ -22,26 +22,63 @@
 				class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
-			<div class="biaoti">添加比赛信息</div>
+			<div class="biaoti">添加官方赛事信息</div>
 		</div>
-		<div data-role="content" class="content">
-			<div class="content_div">
-				<div class="content_div_left">名称：</div>
-				<div class="content_div_right">
-					<input type="text" name="competitionName" class="competitionName"
-						id="competitionName" data-role='none' />
+		
+		<div class="content">
+			<div class="button3">
+				<div class="a">时间:</div>
+				<input type="date" class="time" placeholder="" id="time"
+					data-role='none' />
+			</div>
+			
+			<div class="button3">
+				<div class="a">场地:</div>
+				<select data-role='none' class="changdi" placeholder="" id="address">
+					<c:choose>
+						<c:when test="${!empty rinks}">
+							<c:forEach items="${rinks}" var="rink" varStatus="st">
+								<option value='${rink.rinkId}'>${rink.rinkName}</option>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</select>
+			</div>
+			
+			<div class="button4">
+				<div class="a">对阵双方:</div>
+				<select data-role='none' class="teama" placeholder="" id="clubAName">
+				<option value='-1'>--请选择主场俱乐部--</option>
+					<c:choose>
+						<c:when test="${!empty clubs}">
+							<c:forEach items="${clubs}" var="club" varStatus="st">
+								<option value='${club.clubId}'>${club.clubName}</option>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</select>
+				<div class="vs">VS</div>
+				<select data-role='none' class="teamb" placeholder="" id="clubBName">
+				<option value='-1'>--请选择客场俱乐部--</option>
+					<c:choose>
+						<c:when test="${!empty clubs}">
+							<c:forEach items="${clubs}" var="club" varStatus="st">
+								<option value='${club.clubId}'>${club.clubName}</option>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</select>
+			</div>
+			<div class="button5">
+				<div class="a">备注:</div>
+				<div>
+					<textarea class="beizhu" name="beizhu" id="beizhu">
+				</textarea>
 				</div>
 			</div>
-			<div class="content_div">
-				<div class="content_div_left">简介：</div>
-				<div class="content_div_right">
-					<textarea name="errorMain" id="competitionConstruction"
-						class="competitionConstruction" placeholder="请简要说明">
-               			 </textarea>
-				</div>
+			<div class="queren">
+				<input type="submit" data-role='none' value="提交" class="submitBtn"></input>
 			</div>
-			<input type="button" value="添加" data-role='none' class="submitBtn"
-				name="imgupload" id="imgupload" />
 		</div>
 		<div class="button">
 			<div class="shouye" onclick="shouyeClick()">

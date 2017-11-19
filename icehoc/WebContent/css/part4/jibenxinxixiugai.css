@@ -61,15 +61,33 @@
 	margin-left: 80%;
 	margin-top: 3%;
 }
-
+/*
 .weight{
 	width: 100%;
 }
 
+
 .height{
 	width: 100%;
-}
+}*/
 
 .time{
 	width: 100%;
+}
+
+.content_div_right{
+	width: 80%;
+	margin: auto;
+}
+
+.b{
+	width: 80%;
+	padding: 0!important;
+}
+
+.ui-slider {
+    height: 30px;
+    margin: 0!important;
+    padding: 0;
+    width: 105%;
 }

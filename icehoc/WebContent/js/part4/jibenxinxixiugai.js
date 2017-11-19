@@ -44,7 +44,7 @@ function callback(content) {
 		handlingId : handling,
 		birthday : birthday
 	};
-	// alert(content.length)
+	
 	alert(JSON.stringify(data));
-	jump(TIANBINGTIANJIANGURL, data);
+	//jump(TIANBINGTIANJIANGURL, data);
 }

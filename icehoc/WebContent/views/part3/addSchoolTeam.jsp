@@ -47,7 +47,7 @@
                			 </textarea>
 				</div>
 			</div>
-			<input type="button" value="添加" data-role='none' class="submitBtn"
+			<input type="button" value="提交" data-role='none' class="submitBtn"
 				name="imgupload" id="imgupload" />
 		</div>
 		<div class="button">

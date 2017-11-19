@@ -51,8 +51,6 @@
 					max="200" data-popup-enabled="true">
 			</div>
 			
-			
-
 			<div class="height">
 				CM
 			</div>

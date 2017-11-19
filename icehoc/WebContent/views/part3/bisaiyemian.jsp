@@ -70,13 +70,15 @@
 		<!--导航栏下面内容-->
 		<div data-role="content" class="all">
 			<c:choose>
-				<c:when test="${!empty duiKangs}">
-					<c:forEach items="${duiKangs}" var="duiKang" varStatus="st">
+				<c:when test="${!empty saiShiInfos}">
+					<c:forEach items="${saiShiInfos}" var="saiShiInfo" varStatus="st">
 						<div class="everyone"
-							onclick="goto1('${duiKang.id}','competition')" id="competition">
-							<div class="name">${duiKang.competitionName}</div>
-							<div class="introduce">比赛时间： ${duiKang.pkDate}</div>
-							<div class="introduce">相关信息：${duiKang.clubAName}VS${duiKang.clubBName}</div>
+							onclick="goto1('${saiShiInfo.id}','competition')" id="competition">
+							<div class="name">${saiShiInfo.competitionName}</div>
+							<div class="introduce">比赛时间： ${saiShiInfo.pkDate}</div>
+							<div class="introduce">相关信息：${saiShiInfo.clubAName}VS${saiShiInfo.clubBName}</div>
+							<div class="introduce">备注：${saiShiInfo.remark}</div>
+						
 						</div>
 					</c:forEach>
 				</c:when>
