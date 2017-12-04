@@ -36,18 +36,18 @@ $(".shouye").click(function() {
 	jump(DAOHANGLANURL, data);
 });
 $(".zhanshu").click(function() {
-	window.location.href="";
-//	var data = {
-//		operateType : "zhanshu",
-//	};
-//	jump(DAOHANGLANURL, data);
+	window.location.href = "";
+	// var data = {
+	// operateType : "zhanshu",
+	// };
+	// jump(DAOHANGLANURL, data);
 });
 $(".zhandui").click(function() {
-	window.location.href="";
-//	var data = {
-//		operateType : "zhandui",
-//	};
-//	jump(DAOHANGLANURL, data);
+	window.location.href = "";
+	// var data = {
+	// operateType : "zhandui",
+	// };
+	// jump(DAOHANGLANURL, data);
 });
 $(".wode").click(function() {
 	var data = {
@@ -56,7 +56,7 @@ $(".wode").click(function() {
 	jump(DAOHANGLANURL, data);
 });
 
-//屏幕适配
+// 屏幕适配
 (function(doc, win) {
 	var docEl = doc.documentElement, resizeEvt = 'orientationchange' in window ? 'orientationchange'
 			: 'resize', recalc = function() {
@@ -72,9 +72,6 @@ $(".wode").click(function() {
 	doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 /*
-width=device-width ：表示宽度是设备屏幕的宽度 
-initial-scale - 初始的缩放比例
-minimum-scale - 允许用户缩放到的最小比例
-maximum-scale - 允许用户缩放到的最大比例
-user-scalable - 用户是否可以手动缩放
-*/
+ * width=device-width ：表示宽度是设备屏幕的宽度 initial-scale - 初始的缩放比例 minimum-scale -
+ * 允许用户缩放到的最小比例 maximum-scale - 允许用户缩放到的最大比例 user-scalable - 用户是否可以手动缩放
+ */

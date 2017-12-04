@@ -14,6 +14,11 @@
 
 <script src="../../js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../../js/jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
+
+
+<script src="../../js/jQuery/layer/layer.js"></script>
+  <!--  <script src="layer/extend/layer.ext.js"></script> --> 
+
 </head>
 <body>
 	<div data-role="page" class="allpage">
@@ -29,7 +34,9 @@
 					class="jiechubangding"></input>
 			</div>
 		</div>
-		<div class="jiben">
+		
+		<div class="all"> 
+			<div class="jiben">
 			<div class="a ">基本信息</div>
 			<div class="everyone">
 				<div class="day">所属俱乐部：${club.clubName}</div>
@@ -61,7 +68,11 @@
 			</div>
 		</div>
 
-		<div class="shujv">
+		    <div class="shujv">
+			
+		</div>
+		
+
 			<div class="a">数据信息</div>
 			<div class="everyone">
 				<div class="day">个人数据（最近三场比赛）</div>

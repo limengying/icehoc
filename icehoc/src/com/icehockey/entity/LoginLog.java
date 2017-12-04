@@ -1,16 +1,13 @@
 package com.icehockey.entity;
 
-import java.util.Date;
-
 public class LoginLog {
 	private int id; // 记录编号
 	private int userId; // 用户编号
 	private String ipAddress; // 登录IP地址
-	private Date loginTime; // 登录时间
-	private Date loginOffTime; // 登出时间
+	private boolean signed;//是否签到
+	private String loginTime; // 登录时间
+	private String loginOffTime; // 登出时间
 	private String remark; // 备注
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -29,16 +26,22 @@ public class LoginLog {
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
-	public Date getLoginTime() {
+	public boolean isSigned() {
+		return signed;
+	}
+	public void setSigned(boolean signed) {
+		this.signed = signed;
+	}
+	public String getLoginTime() {
 		return loginTime;
 	}
-	public void setLoginTime(Date loginTime) {
+	public void setLoginTime(String loginTime) {
 		this.loginTime = loginTime;
 	}
-	public Date getLoginOffTime() {
+	public String getLoginOffTime() {
 		return loginOffTime;
 	}
-	public void setLoginOffTime(Date loginOffTime) {
+	public void setLoginOffTime(String loginOffTime) {
 		this.loginOffTime = loginOffTime;
 	}
 	public String getRemark() {
@@ -47,34 +50,21 @@ public class LoginLog {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-	
-	public LoginLog() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	public LoginLog(int id, int userId, String ipAddress, Date loginTime,
-			Date loginOffTime, String remark) {
+	public LoginLog(int id, int userId, String ipAddress, boolean signed, String loginTime, String loginOffTime,
+			String remark) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.ipAddress = ipAddress;
+		this.signed = signed;
 		this.loginTime = loginTime;
 		this.loginOffTime = loginOffTime;
 		this.remark = remark;
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "LoginLog [id=" + id + ", userId=" + userId + ", ipAddress="
-				+ ipAddress + ", loginTime=" + loginTime + ", loginOffTime="
-				+ loginOffTime + ", remark=" + remark + "]";
+		return "LoginLog [id=" + id + ", userId=" + userId + ", ipAddress=" + ipAddress + ", signed=" + signed
+				+ ", loginTime=" + loginTime + ", loginOffTime=" + loginOffTime + ", remark=" + remark + "]";
 	}
 	
-
-
-
 }

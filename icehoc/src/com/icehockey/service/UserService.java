@@ -1,11 +1,14 @@
 package com.icehockey.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.icehockey.dao.UserDao;
 import com.icehockey.entity.Category;
 import com.icehockey.entity.Handling;
 import com.icehockey.entity.IdInfo;
+import com.icehockey.entity.LoginLog;
 import com.icehockey.entity.Player;
 import com.icehockey.entity.User;
 
@@ -16,11 +19,13 @@ public class UserService {
 	User user = null;// 声明一个User对象
 	Player player = null;
 	IdInfo idInfo = null;
+	LoginLog loginLog=null;
 
 	CategoryService categoryService = new CategoryService();
 	HandlingService handlingService = new HandlingService();
 	PlayerService playerService = new PlayerService();
 	IdInfoService idInfoService = new IdInfoService();
+	LoginLogService loginLogService=new LoginLogService();
 
 	/**
 	 * 
@@ -44,6 +49,20 @@ public class UserService {
 		return user;
 	}
 
+	public int addLoginRecord(int loginUserId,String s){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+		Date currentDateTime = new Date();
+		System.out.println(df.format(currentDateTime));// new Date()为获取当前系统时间
+		String dateString = df.format(currentDateTime);
+		boolean f=loginLogService.addLoginLog(loginUserId,dateString,s);
+		if(f){
+			loginLog=loginLogService.getLogNewAdd(loginUserId,dateString);
+		}
+		if(loginLog!=null){
+			return loginLog.getId();
+		}
+		return -1;
+	}
 	/**
 	 * 
 	 * // 通过手机号和密码注册
@@ -104,15 +123,25 @@ public class UserService {
 			return state;
 		}
 	}
-
+	/**
+	 * 通过userId等参数新建一个player 插入新用户，首先判断前端传入的角色名称，持杆方式名称是否存在，如果都存在，则插入，返回是否插入成功
+	 */
 	public User queryUserById(int userId) {
 		user = dao.getUserByUserId(userId);
 		return user;
 	}
-
+	/**
+	 * 通过userId等参数新建一个player 插入新用户，首先判断前端传入的角色名称，持杆方式名称是否存在，如果都存在，则插入，返回是否插入成功
+	 */
 	public boolean updateUser(int userId, String name, String birthday, String address) {
 		return dao.updateUser(userId, name, birthday, address);
 		
 	}
-
+	
+	/**
+	 * 签到
+	 */
+	public boolean sign(int loginLogid) {
+		return loginLogService.sign(loginLogid);
+	}
 }
