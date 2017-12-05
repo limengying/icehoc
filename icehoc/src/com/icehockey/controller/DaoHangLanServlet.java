@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.icehockey.entity.Player;
 import com.icehockey.entity.User;
+import com.icehockey.service.LoginLogService;
 import com.icehockey.service.PlayerService;
 
 /**
@@ -35,20 +36,29 @@ public class DaoHangLanServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		response.setHeader("set-Cookie", "name=value;HttpOnly");
-		System.out.println("-------------首页.html-----------");
+		HttpSession session = request.getSession();
 		PrintWriter writer = response.getWriter();
 		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("-----------------导航栏后台程序.html----------");
+		
 		System.out.println("跳转后的sessionId :" + session.getId());
 		PlayerService playerService=new PlayerService();
+		LoginLogService loginLogService=new LoginLogService();
+
 		// session
-		if (session.getAttribute("user") != null) {
+		if (session.getAttribute("user") != null&&session.getAttribute("loginLogId")!=null) {
+			
 			User user=(User) session.getAttribute("user");
+			int loginLogId=(int) session.getAttribute("loginLogId");
+			int signedNum=loginLogService.getSignedNum(user.getUserId());
+			session.setAttribute("loginLogId", loginLogId);
+			System.out.println(signedNum);
+			session.setAttribute("signedNum", signedNum);
 			map.put("reslut", "0");
 			if (request.getParameter("operateType") != null) {
 				String opt = request.getParameter("operateType");

@@ -29,12 +29,10 @@
 	
 }
 
-
-
 .all{
 	display: flex;
 	flex-direction: column;
-	height:75% ;
+	height:83% ;
 	width: 100%;
 	padding:0rem!important;
 	overflow: auto;

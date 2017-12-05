@@ -1,7 +1,5 @@
 package com.icehockey.entity;
 
-import java.util.Date;
-
 public class Rink {
 	private int rinkId; // 场地编号
 	private String rinkName; // 场地名称

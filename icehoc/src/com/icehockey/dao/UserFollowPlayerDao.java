@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import com.icehockey.entity.UserFollowPlayer;
 import com.icehockey.util.DBUtil;
@@ -38,16 +38,23 @@ public class UserFollowPlayerDao {
 				int id = rs.getInt("id"); // 记录编号
 				// int userId=rs.getInt("userId"); // 用户编号
 				// int playerId=rs.getInt("playerId"); // 运动员编号
-				Timestamp timestamp = rs.getTimestamp("followDate");// 关注时间,
-				Date followDate = null;
+
+				Timestamp timestamp = rs.getTimestamp("followDate");// '关注时间',
+				String followDate = null;
 				if (timestamp != null) {
-					followDate = new Date(timestamp.getTime());
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式
+					followDate = df.format(timestamp.getTime());
+					System.out.println("followDateDao" + followDate);
 				}
-				timestamp = rs.getTimestamp("cancelDate");// 接触绑定时间,
-				Date cancelDate = null;
+
+				timestamp = rs.getTimestamp("cancelDate");// '解除绑定时间',
+				String cancelDate = null;
 				if (timestamp != null) {
-					cancelDate = new Date(timestamp.getTime());
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式
+					followDate = df.format(timestamp.getTime());
+					System.out.println("cancelDateDao" + cancelDate);
 				}
+
 				String remark = rs.getString("remark"); // 备注
 				userFollowPlayer = new UserFollowPlayer(id, userId, playerId, followDate, cancelDate, remark);
 				return userFollowPlayer;
@@ -91,19 +98,26 @@ public class UserFollowPlayerDao {
 			preparedStatement.setInt(1, id);
 			rs = preparedStatement.executeQuery();
 			if (rs.next()) {
-				id = rs.getInt("id"); // 记录编号
+				// int id = rs.getInt("id"); // 记录编号
 				int userId = rs.getInt("userId"); // 用户编号
 				int playerId = rs.getInt("playerId"); // 运动员编号
-				Timestamp timestamp = rs.getTimestamp("followDate");// 关注时间,
-				Date followDate = null;
+
+				Timestamp timestamp = rs.getTimestamp("followDate");// '关注时间',
+				String followDate = null;
 				if (timestamp != null) {
-					followDate = new Date(timestamp.getTime());
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式
+					followDate = df.format(timestamp.getTime());
+					System.out.println("followDateDao" + followDate);
 				}
-				timestamp = rs.getTimestamp("cancelDate");// 接触绑定时间,
-				Date cancelDate = null;
+
+				timestamp = rs.getTimestamp("cancelDate");// '解除绑定时间',
+				String cancelDate = null;
 				if (timestamp != null) {
-					cancelDate = new Date(timestamp.getTime());
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// 设置日期格式
+					followDate = df.format(timestamp.getTime());
+					System.out.println("cancelDateDao" + cancelDate);
 				}
+
 				String remark = rs.getString("remark"); // 备注
 				userFollowPlayer = new UserFollowPlayer(id, userId, playerId, followDate, cancelDate, remark);
 				return userFollowPlayer;
@@ -168,16 +182,14 @@ public class UserFollowPlayerDao {
 	}
 
 	public boolean updateRe2(int id, String followDateString, String cancelDateString) {
-		String sql = "UPDATE userfollowplayer SET followDate=? and cancelDate=? WHERE id=?;";
+		String sql = "UPDATE userfollowplayer SET followDate='"+followDateString+"' , cancelDate='"+cancelDateString+"' WHERE id="+id+";";
+		System.out.println(sql);
 		try {
 			conn = util.openConnection();
 			preparedStatement = conn.prepareStatement(sql);
-			preparedStatement.setString(1, followDateString);
-			preparedStatement.setString(2, cancelDateString);
-			preparedStatement.setInt(3, id);
 			int i = preparedStatement.executeUpdate();
 			if (i == 1) {
-				System.out.println("插入成功");
+				System.out.println("关注更新记录成功");
 				userFollowPlayer = queryById(id);
 				return true;
 			} else

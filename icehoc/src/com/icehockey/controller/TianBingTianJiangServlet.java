@@ -264,6 +264,7 @@ public class TianBingTianJiangServlet extends HttpServlet {
 						"<script language='javascript'>window.location.href='./views/part4/qiuyuanxiangxixinxi.jsp'</script>");
 			} else if ("5".equals(map.get("ok"))) {
 				writer.println(
+						//layer.msg('解除绑定！'); 
 						"<script language='javascript'>window.location.href='./views/part4/tianbingtianjiangzhuyemian.jsp'</script>");
 			} else if ("6".equals(map.get("ok"))) {
 				writer.println(

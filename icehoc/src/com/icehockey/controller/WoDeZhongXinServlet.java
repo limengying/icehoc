@@ -15,10 +15,12 @@ import javax.servlet.http.HttpSession;
 import com.icehockey.entity.City;
 import com.icehockey.entity.Country;
 import com.icehockey.entity.IdInfo;
+import com.icehockey.entity.LoginLog;
 import com.icehockey.entity.Player;
 import com.icehockey.entity.User;
 import com.icehockey.service.CountryCityService;
 import com.icehockey.service.IdInfoService;
+import com.icehockey.service.LoginLogService;
 import com.icehockey.service.PlayerService;
 import com.icehockey.service.UserService;
 
@@ -33,7 +35,6 @@ public class WoDeZhongXinServlet extends HttpServlet {
 	 */
 	public WoDeZhongXinServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -60,6 +61,8 @@ public class WoDeZhongXinServlet extends HttpServlet {
 		CountryCityService countryCityService = new CountryCityService();
 		UserService userService = new UserService();
 		IdInfoService idInfoService = new IdInfoService();
+		LoginLogService loginLogService = new LoginLogService();
+		int loginLogId = -1;
 		Country country = null;
 		City city = null;
 		User user = null;
@@ -68,10 +71,11 @@ public class WoDeZhongXinServlet extends HttpServlet {
 		System.out.println("跳转后的sessionId :" + session.getId());
 		String operateType = null;
 		// session
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("user") == null && session.getAttribute("loginLogId") != null) {
 			map.put("result", "-1");// 没有用户登录
 		} else {
 			user = (User) session.getAttribute("user");
+			loginLogId = (int) session.getAttribute("loginLogId");
 			System.out.println(user + "user");
 			if (request.getParameter("operateType") != null) {
 				operateType = request.getParameter("operateType");
@@ -91,20 +95,20 @@ public class WoDeZhongXinServlet extends HttpServlet {
 				} else if ("xiugaixinxi".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
 
 					String name = user.getUserName();
-					if (!(request.getParameter("name") == null||"".equals(request.getParameter("name")))) {
+					if (!(request.getParameter("name") == null || "".equals(request.getParameter("name")))) {
 						name = request.getParameter("name");
 					}
 					String birthday = user.getBirthday();
-					if (!(request.getParameter("birthday") == null||"".equals(request.getParameter("birthday")))) {
+					if (!(request.getParameter("birthday") == null || "".equals(request.getParameter("birthday")))) {
 						birthday = request.getParameter("birthday");
 					}
 					String address = user.getAddress();
-					if (!(request.getParameter("address") == null||"".equals(request.getParameter("address")))) {
+					if (!(request.getParameter("address") == null || "".equals(request.getParameter("address")))) {
 						address = request.getParameter("address");
 					}
 					boolean f = userService.updateUser(user.getUserId(), name, birthday, address);
 					if (f) {
-						user=userService.queryUserById(user.getUserId());
+						user = userService.queryUserById(user.getUserId());
 						session.setAttribute("user", user);
 						map.put("result", "0");
 						map.put("ok", "2");
@@ -120,6 +124,32 @@ public class WoDeZhongXinServlet extends HttpServlet {
 					} else {
 
 						System.out.println("更新失败");
+					}
+				} else if ("qiandao".equals(operateType)) {// 单击每日签到
+					LoginLog loginLog = loginLogService.isSigned(loginLogId);
+					if (loginLog != null) {
+						if(loginLog.isSigned()){
+							map.put("result", "0");
+							map.put("ok", "5");
+						}else{
+							System.out.println(loginLogId);
+							boolean f = loginLogService.sign(loginLogId);
+							System.out.println(f);
+							if (f) {
+								int signedNum = loginLogService.getSignedNum(user.getUserId());
+								session.setAttribute("signedNum", signedNum);
+								session.setAttribute("players", players);
+								map.put("result", "0");
+								map.put("ok", "4");
+							} else {
+
+								System.out.println("更新失败");
+							}
+						}
+						
+					}else{
+						System.out.println("找不到登录记录");
+						map.put("result", "-2");
 					}
 				}
 			} else {
@@ -138,6 +168,12 @@ public class WoDeZhongXinServlet extends HttpServlet {
 			} else if ("3".equals(map.get("ok"))) {
 				writer.println(
 						"<script language='javascript'>window.location.href='./views/part8/playerCard.jsp'</script>");
+			} else if ("4".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>alert('签到成功');window.location.href='./views/part8/wodezhongxin.jsp'</script>");
+			}  else if ("5".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>alert('本次登录已签到');window.location.href='./views/part8/wodezhongxin.jsp'</script>");
 			} else {
 
 			}

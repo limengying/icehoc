@@ -54,7 +54,7 @@
 				<div class="content_div">
 					<div class="content_div_left">身高CM：</div>
 						<div data-role="fieldcontain" class="b">
-							<input type="range" name="points" id="height" value="160" min="120"
+							<input type="range" name="points" id="height" value="100" min="100"
 								max="200" data-popup-enabled="true">
 						</div>
 				</div>
@@ -62,7 +62,7 @@
 				<div class="content_div">
 					<div class="content_div_left">体重KG：</div>
 						<div data-role="fieldcontain" class="b">
-							<input type="range" name="points" id="weight" value="65" min="35"
+							<input type="range" name="points" id="weight" value="20" min="20"
 							max="100" data-popup-enabled="true">
 						</div>
 				</div>

@@ -47,7 +47,8 @@ public class LoginServlet extends HttpServlet {
 
 		UserService userService = new UserService();
 		User user = null;
-
+		int loginUserId = -2;
+		String loginLogRemark = "";
 		// 遍历map得到前端传入的值
 		String telephone = "";
 		// String verificationCode = "";
@@ -68,14 +69,19 @@ public class LoginServlet extends HttpServlet {
 							System.out.println("找到session当前用户" + user);
 							session.setAttribute("user", user);
 							System.out.println("user: " + user);
+							loginUserId = user.getUserId();
+							loginLogRemark = "登录成功";
 							map.put("result", "0");
 							map.put("telephone", telephone);
 							map.put("password", password);
 						} else {
+							loginUserId = user.getUserId();
+							loginLogRemark = telephone + "密码错误";
 							System.out.println("用户输入 密码错误，session存储失败");
 							map.put("result", "-3");// 密码错误
 						}
 					} else {
+						loginLogRemark = telephone + "用户不存在";
 						System.out.println("该用户不存在，map未找到...");
 						map.put("result", "-2");
 					}
@@ -110,6 +116,9 @@ public class LoginServlet extends HttpServlet {
 					map.put("result", "-1");
 				}
 			}
+			int loginLogId = userService.addLoginRecord(loginUserId, loginLogRemark);
+			System.out.println("loginLogId: " + loginLogId);
+			session.setAttribute("loginLogId", loginLogId);// 保存当前系统审计表新登录记录Id
 		} else {// 没有操作类型
 
 		}
@@ -127,10 +136,10 @@ public class LoginServlet extends HttpServlet {
 		} else if ("10".equals(map.get("result"))) {// 注册成功，跳转至登录
 			writer.println(
 					"<script language='javascript'>alert('注册成功，请登录!');window.location.href='./views/part1/qitadenglufangshi.jsp'</script>");
-		}  else if ("11".equals(map.get("result"))) {// 注册失败，跳转至注册
+		} else if ("11".equals(map.get("result"))) {// 注册失败，跳转至注册
 			writer.println(
 					"<script language='javascript'>alert('用户已存在，请登录!');window.location.href='./views/part1/qitadenglufangshi.jsp'</script>");
-		}else if ("12".equals(map.get("result"))) {// 注册失败，跳转至注册
+		} else if ("12".equals(map.get("result"))) {// 注册失败，跳转至注册
 			writer.println(
 					"<script language='javascript'>alert('注册失败，请重新注册!');window.location.href='./views/part1/zhuceyemian.jsp'</script>");
 		}
