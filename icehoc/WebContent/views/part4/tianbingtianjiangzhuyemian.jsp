@@ -89,7 +89,7 @@
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<P>没有记录</P>
+					<P class="tishi">没有记录</P>
 				</c:otherwise>
 			</c:choose>
 		</div>

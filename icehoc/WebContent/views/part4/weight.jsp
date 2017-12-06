@@ -38,7 +38,7 @@
 
 
 		<div data-role="fieldcontain" class="fieldcontain">
-			<input type="range" name="points" id="points" value="65" min="35"
+			<input type="range" name="points" id="points" value="20" min="20"
 				max="100" data-popup-enabled="true">
 		</div>
 

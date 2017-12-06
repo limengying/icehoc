@@ -35,7 +35,7 @@
 				class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
-			<div class="biaoti">兵临城下</div>
+			<div class="biaoti">兵临城下(已关注)</div>
 			<div class="zengjia">
 				<img src="../../img/part5/plus.png" />
 			</div>
@@ -49,6 +49,7 @@
 
 		<!--导航栏下面内容-->
 		<div data-role="content" class="all">
+		<p class="tishi">用户关注球员相关赛事:</p>
 			<c:choose>
 				<c:when test="${!empty duiKangs}">
 					<c:forEach items="${duiKangs}" var="duiKang" varStatus="st">
@@ -89,6 +90,57 @@
 										<img src="${duiKang.clubBLogo}" />
 									</div>
 									<div class="name">${duiKang.clubBName}</div>
+								</div>
+							</div>
+						</div>
+
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<P>没有记录</P>
+				</c:otherwise>
+			</c:choose>
+			<p class="tishi">用户关注官方赛事:</p>
+			<c:choose>
+				<c:when test="${!empty saiShiInfos}">
+					<c:forEach items="${saiShiInfos}" var="saiShi" varStatus="st">
+						<div class="everyone" onclick="goto1('${saiShi.id}')">
+							<div class="day">比赛时间：${saiShi.pkDate}</div>
+							<!--年月日时间 -->
+
+							<div class="changdi">比赛场地：${saiShi.rinkName}</div>
+							<div class="huanjing">
+								环境指数:${saiShi.environmentalIndex}
+								<c:choose>
+									<c:when test="${!empty saiShi.environmentalIndex}">
+										<c:forEach var="s" begin="1"
+											end="${saiShi.environmentalIndex}">
+											<img src="../../img/part2/star.png" />
+										</c:forEach>
+									</c:when>
+								</c:choose>
+							</div>
+							<div class="team">
+								<div class="content_left">
+									<div class="img">
+										<img src="${saiShi.clubALogo}" />
+									</div>
+									<div class="name">${saiShi.clubAName}</div>
+								</div>
+
+								<div class="content_mid">
+									<div class="">${saiShi.competitionDegreeName}</div>
+									<div class="">${saiShi.pkTime}</div>
+									<!--时、分时间 -->
+									<div class="">第${saiShi.round}轮</div>
+
+								</div>
+
+								<div class="content_right">
+									<div class="img">
+										<img src="${saiShi.clubBLogo}" />
+									</div>
+									<div class="name">${saiShi.clubBName}</div>
 								</div>
 							</div>
 						</div>

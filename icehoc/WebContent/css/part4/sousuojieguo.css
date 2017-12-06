@@ -1,0 +1,57 @@
+
+.all{
+	display: flex;
+	flex-direction: column;
+	height:85% ;
+	width: 100%;
+	padding:0rem!important;
+	overflow: auto;
+}
+
+.everyone div{
+	margin: 1%;
+}
+
+.everyone_div{
+	height: 35%;
+}
+
+.content_left{
+	width:30%;
+}
+
+.content_mid{
+	width:40%;
+	
+}
+
+.content_right{
+	width:30%;
+}
+
+.team{
+	background:whitesmoke ;
+	border-style:solid; 
+	border-width:1px; 
+	border-color:#000;
+	margin: 2 border-style: rem 1rem!important;
+	padding:1%;
+	display: flex;
+}
+
+.image img{
+	height: 6rem;
+	width: 6rem;
+}
+
+
+.guanzhu{
+	width: 20%;
+	float: right;
+}
+
+.buttonguanzhu{
+	width: 100%;
+	padding: 7%;
+
+}

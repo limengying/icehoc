@@ -8,11 +8,10 @@
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 <title>搜索结果页面</title>
-<link rel="stylesheet"
-	href="../../css/part4/tianbingtianjiangzhuyemian.css" />
+
 <link rel="stylesheet"
 	href="../../css/jqueryMobile/jquery.mobile-1.4.5.min.css" />
-<link rel="stylesheet" href="../../css/part4/tianbingtianjiangzhuyemian.css" />
+<link rel="stylesheet" href="../../css/part4/sousuojieguo.css" />
 <link rel="stylesheet" href="../../css/part1/allpagesame.css" />
 <script src="../../js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../../js/jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
@@ -33,48 +32,59 @@
 
 		<div data-role="content" class="all">
 			<div class="everyone">
-				<div class="day"></div>
 				<c:choose>
-					<c:when test="${player!=null}">
-						<div class="team">
-							<div class="content_left">
-							<input type="hidden" value="${player.playerId}" id="playerId"/>
-								<div class="image">
-									<img src="${player.image}" />
+					<c:when test="${!empty players}">
+						<c:forEach items="${players}" var="player" varStatus="st">
+							<div class="everyone_div">
+								<div class="team">
+									<div class="content_left">
+										<input type="hidden" value="${player.playerId}" id="playerId" />
+										<div class="image">
+											<img src="${player.image}" />
+										</div>
+									</div>
+
+									<div class="content_mid">
+										<div class="name">姓名:${player.name}</div>
+										
+										<div class="height">身高:${player.height}cm</div>
+									</div>
+									<div class="content_right">
+									<div class="sex">
+											性别:
+											<c:if test="${player.sex eq true}">男</c:if>
+											<c:if test="${player.sex eq false}">女</c:if>
+										</div>
+										<div class="weight">体重:${player.weight}kg</div>
+										
+									</div>
 								</div>
+								<div class="guanzhu">
+									<input type="button" data-role='none' value="关注" id="guanzhu"
+										class="buttonguanzhu" onclick="guanzhu('${player.playerId}')"/>
+								</div>
+
 							</div>
 
-							<div class="content_mid">
-								<div class="name">姓名:${player.name}</div>
-								<div class="sex">
-									性别:
-									<c:if test="${player.sex eq true}">男</c:if>
-									<c:if test="${player.sex eq false}">女</c:if>
-								</div>
-								<div class="height">身高:${player.height}cm</div>
-							</div>
-							<div class="content_right">
-								<div class="weight">体重:${player.weight}kg</div>
-								<div class="countryId">国籍:${country.nameChinese}</div>
-								<div class="cityId">城市:${city.cityName}</div>
-							</div>
-						</div>
-
+						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<p>不存在该运动员</p>
+						<p class="tishi">不存在该运动员</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
-				<div class="guanzhu">
-			<input type="button" data-role='none' value="关注" id="guazhu" class="buttonguanzhu" />
+			<!--
+            	<div class="guanzhu">
+					<input type="button" data-role='none' value="关注" id="guazhu" class="buttonguanzhu" />
+				</div>
+            -->
+
 		</div>
-		</div>
 
 
-	
 
-	
+
+
 
 
 		<div class="button">

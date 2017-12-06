@@ -69,15 +69,15 @@ public class PlayerService {
 	 * 
 	 *         通过用户编号和球员名字字符串，精确查询找到用户关注的球员列表
 	 */
-	public Player getUserFollowedPlayersByPlayerName(int userId, String playerName) {
-		player = playerDao.getPlayersByPlayerName1(playerName);
-		if (player != null) {
-			System.out.println(player);
+	public List<Player> getUserFollowedPlayersByPlayerName(int userId, String playerName) {
+		players = playerDao.getPlayersByPlayerName1(playerName);
+		if (players != null) {
+			System.out.println(players);
 		} else {
 			System.out.println("getUserFollowedPlayersByPlayerName.....PlayerService......null");
-			player = null;
+			players = null;
 		}
-		return player;
+		return players;
 	}
 
 	/**

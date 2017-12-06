@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.icehockey.entity.SaiShiInfo;
-import com.icehockey.entity.SaiShiInfo;
 import com.icehockey.util.DBUtil;
 
 public class SaiShiInfoDao {
@@ -239,6 +238,115 @@ public class SaiShiInfoDao {
 		try {
 			conn = util.openConnection();
 			preparedStatement = conn.prepareStatement(sql);
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+
+				int id = rs.getInt("id");
+				String competitionName=rs.getString("competitionName");
+				int teamAId = rs.getInt("teamAId");
+				String clubAName = rs.getString("clubAName");
+				String clubALogo = rs.getString("clubALogo");
+				int teamBId = rs.getInt("teamBId");
+				String clubBName = rs.getString("clubBName");
+				String clubBLogo = rs.getString("clubBLogo");
+				boolean competitionType = rs.getBoolean("competitionType");
+				String remark = rs.getString("remark");
+				int rinkId = rs.getInt("rinkId");
+				Timestamp timestamp = rs.getTimestamp("pkDate");// 年月日星期几
+				String pkDate = null;
+				if (timestamp != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd EEEE");// 设置日期格式
+					pkDate = df.format(timestamp.getTime());
+				}
+				System.out.println("pkDate:"+pkDate);
+				timestamp = rs.getTimestamp("pkTime");// 年月日星期几
+				String pkTime = null;
+				if (timestamp != null) {
+					SimpleDateFormat df = new SimpleDateFormat("HH:mm");// 设置日期格式
+					pkTime = df.format(timestamp.getTime());
+				}
+				System.out.println("pkTime:"+pkTime);
+				int competitionDegreeId = rs.getInt("competitionDegreeId");
+				int round = rs.getInt("round");
+				String rinkName = rs.getString("rinkName");
+				String environmentalIndex = rs.getString("environmentalIndex");
+				String address = rs.getString("address");
+				String competitionDegreeName = rs.getString("competitionDegreeName");
+				SaiShiInfo=new SaiShiInfo(id, competitionName, teamAId, clubAName, clubALogo, teamBId, clubBName, clubBLogo, competitionType, remark, rinkId, pkDate, pkTime, competitionDegreeId, round, rinkName, environmentalIndex, address, competitionDegreeName);
+				System.out.println(SaiShiInfo);
+				SaiShiInfos.add(SaiShiInfo);
+			}
+			return SaiShiInfos;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return SaiShiInfos;
+	}
+
+
+	public boolean addFollowGuanFang(int competitionId, int userId, String dateString) {
+		String sql = "INSERT INTO userCompetition ( competitionId, userId, onDate ) " + "VALUES ( " + competitionId + ", "
+				+ userId + ", '" + dateString + "' )";
+		System.out.println(sql);
+		try {
+			// 获取数据库链接
+			conn = util.openConnection();
+			// 执行SQL1语句
+			preparedStatement = conn.prepareStatement(sql);
+			int row = preparedStatement.executeUpdate(sql);
+			System.out.println(row);
+			if (row == 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			// 关闭Statement
+			try {
+				System.out.println("statement关闭");
+				preparedStatement.close();
+			} catch (Exception e) {
+				System.out.println("statement关闭失败");
+			}
+			// 关闭Connection
+			try {
+				System.out.println("conn关闭");
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("conn关闭失败");
+			}
+		}
+
+		return false;
+	}
+
+
+	public List<SaiShiInfo> getSaiShiInfosUserFollow(int userId) {
+		
+		List<SaiShiInfo> SaiShiInfos = new ArrayList<SaiShiInfo>();
+		String sql="SELECT saishiinfo.* FROM saishiinfo, `user`, usercompetition WHERE saishiinfo.id = usercompetition.competitionId AND `user`.userId = usercompetition.userId AND `user`.userId = ?";
+		System.out.println(sql);
+		try {
+			conn = util.openConnection();
+			preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setInt(1, userId);
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 

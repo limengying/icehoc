@@ -110,7 +110,7 @@ public class PlayerDao {
 	public List<Player> getPlayersUserFollowedByNameString(int userId, String playerNameString) {
 		players = new ArrayList<Player>();
 		String sql = "SELECT player.* FROM player, userfollowplayer, user WHERE player.playerId = userfollowplayer.playerId AND `user`.userId = userfollowplayer.userId AND `user`.userId = "
-				+ userId + " AND player.`name` like '%" + playerNameString + "%';";
+				+ userId + " AND userfollowplayer.cancelDate='1900-01-01 00:00:00' AND player.`name` like '%" + playerNameString + "%';";
 		System.out.println(sql);
 		try {
 			conn = util.openConnection();
@@ -255,14 +255,15 @@ public class PlayerDao {
 		return players;
 	}
 
-	public Player getPlayersByPlayerName1(String playerName) {
+	public List<Player> getPlayersByPlayerName1(String playerName) {
+		players=new ArrayList<Player>();
 		String sql = "SELECT * FROM player WHERE player. name = ?;";
 		try {
 			conn = util.openConnection();
 			preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setString(1, playerName);
 			rs = preparedStatement.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 
 				int playerId = rs.getInt("playerId"); // 运动员编号
 				String name = rs.getString("name"); // 姓名
@@ -298,8 +299,9 @@ public class PlayerDao {
 				player = new Player(playerId, name, sex, birthday, height, weight, countryId, cityId, firstLearnAge,
 						roleId, handlingId, idType, idInfoId, categoryId, position, creatMeld, image, modificateDate,
 						remark);
+				players.add(player);
 			}
-			return player;
+			return players;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -319,7 +321,7 @@ public class PlayerDao {
 			}
 
 		}
-		return player;
+		return players;
 	}
 
 	/**

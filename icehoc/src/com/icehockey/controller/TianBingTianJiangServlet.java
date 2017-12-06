@@ -109,15 +109,10 @@ public class TianBingTianJiangServlet extends HttpServlet {
 				} else if ("jingquesousuo".equals(operateType)) {// 如果操作类型是精确搜索，即根据名字字符串搜索当前关注球员
 					String playerName = request.getParameter("playerName");
 					System.out.println("playerName:" + playerName);
-					player = playerService.getUserFollowedPlayersByPlayerName(user.getUserId(), playerName);
-					if (player != null) {
-						country = countryCityService.queryCountry(player.getCountryId());
-						city = countryCityService.queryCity(player.getCityId());
-					}
-					session.setAttribute("country", country);
-					session.setAttribute("city", city);
+					players = playerService.getUserFollowedPlayersByPlayerName(user.getUserId(), playerName);
+		
 					System.out.println(player);
-					session.setAttribute("player", player);
+					session.setAttribute("players", players);
 					map.put("result", "0");
 					map.put("ok", "3");
 				} else if ("zhuyemianToXiangxi".equals(operateType)) {// 如果操作类型是精确搜索，即根据名字字符串搜索当前关注球员
@@ -164,7 +159,9 @@ public class TianBingTianJiangServlet extends HttpServlet {
 					System.out.println("playerId:" + playerId);
 					UserFollowPlayer userFollowPlayer = playerService.userFollowPlayer(user.getUserId(), playerId);
 					System.out.println(userFollowPlayer);
+					//重新获取已关注球员
 					players = playerService.getUserFollowedPlayers(user.getUserId());
+					System.out.println(players);
 					session.setAttribute("userFollowPlayer", userFollowPlayer);
 					
 					session.setAttribute("players", players);
