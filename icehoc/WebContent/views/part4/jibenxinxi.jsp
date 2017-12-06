@@ -62,8 +62,8 @@
 					<div class="firstLearnAge">初学年龄：${player.firstLearnAge}岁</div>
 					<div class="handlingId">持杆方式：${handling.handlingName}</div>
 					<div class="creatMeld">谁创建我：${creatMeUser.userName}</div>
-					<!-- <div class="">当前组别：动态获取</div> -->
-					<div class="">师从教练：动态获取</div>
+					<!-- <div class="">当前组别：动态获取</div> 
+					<div class="">师从教练</div>-->
 
 				</div>
 			</div>
