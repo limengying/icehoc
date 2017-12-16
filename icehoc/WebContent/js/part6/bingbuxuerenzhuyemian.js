@@ -1,21 +1,32 @@
-$(document).ready(function() {
-	$(".saishixuanze").click(function(){
-		window.location.href = "../../views/part5/binglinchengxiazhuyemian.jsp";
-	});
-	$(".bingmianxuandian").click(function(){
-		window.location.href = "../../views/part6/bingmianxuandian.jsp";
-	});
-	$(".menjiangjishutongji").click(function(){
-		window.location.href = "../../views/part6/menjiangjishutongji.jsp";
-	});
-	$(".qiuyuanjishutongji").click(function(){
-		window.location.href = "../../views/part6/qiuyuanjishutongji.jsp";
-	});
-	$(".button3").click(function(){
-		// 请求后台服务
-		var data = {
-			operateType : "BingLinChengXia",
-		};
-		jump(BINGLINCHENGXIAURL, data);
-	});
-});
+//$('inputp[name=checkbox]').click(function() {
+//	$(this).attr('checked', 'checked').siblings().removeAttr('checked');
+//});
+var playerId = "";
+var competitionType = "";
+function goto1(para) {
+	playerId = para;
+}
+function xunlianClick() {
+	competitionType = "xunlian";
+}
+function bisaiClick() {
+	competitionType = "bisai";
+}
+function xiayibuClick() {
+	if (competitionType == "") {
+		alert("请选择比赛或者训练");
+		return false;
+	}
+	if (playerId == "") {
+		alert("请选择一名球员");
+		return false;
+	}
+	// 请求后台服务
+	var data = {
+		operateType : "xiayibu",
+		playerId : playerId,
+		competitionType : competitionType
+	};
+	alert(JSON.stringify(data));
+	jump(BINGBUXUERENURL, data);
+}

@@ -53,14 +53,12 @@ public class DuiKangDao {
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd EEEE");// 设置日期格式
 					pkDate = df.format(timestamp.getTime());
 				}
-				System.out.println("pkDate:"+pkDate);
 				timestamp = rs.getTimestamp("pkTime");// 年月日星期几
 				String pkTime = null;
 				if (timestamp != null) {
 					SimpleDateFormat df = new SimpleDateFormat("HH:mm");// 设置日期格式
 					pkTime = df.format(timestamp.getTime());
 				}
-				System.out.println("pkTime:"+pkTime);
 				int competitionDegreeId = rs.getInt("competitionDegreeId");
 				int round = rs.getInt("round");
 				String rinkName = rs.getString("rinkName");
@@ -69,7 +67,6 @@ public class DuiKangDao {
 				userId = rs.getInt("userId");
 				String competitionDegreeName = rs.getString("competitionDegreeName");
 				duikang=new DuiKang(id, competitionName, teamAId, clubAName, clubALogo, teamBId, clubBName, clubBLogo, competitionType, remark, rinkId, pkDate, pkTime, competitionDegreeId, round, rinkName, environmentalIndex, address, userId, competitionDegreeName);
-				System.out.println(duikang);
 				duiKangs.add(duikang);
 			}
 			return duiKangs;

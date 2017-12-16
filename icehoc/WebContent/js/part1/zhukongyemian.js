@@ -4,14 +4,14 @@ $(document).ready(function() {
 		var data = {
 			operateType : "zhukongToJiaoZhu",
 		};
-		//alert(JSON.stringify(data));
+		// alert(JSON.stringify(data));
 		jump(JIAOBINGBIBAIURL, data);
 	});
 	$(".b").click(function() {
 		var data = {
 			operateType : "zhukongToBingTianXueDi",
 		};
-		//alert(JSON.stringify(data));
+		// alert(JSON.stringify(data));
 		jump(BINGTIANXUEDIURL, data);
 		// window.location.href = "../part3/bingtianxuedizhuyemian.jsp";
 	});
@@ -25,12 +25,16 @@ $(document).ready(function() {
 	$(".d").click(function() {// 主页面跳转兵临城下主页面
 		// 请求后台服务
 		var data = {
-			operateType : "BingLinChengXia",
+			operateType : "zhukongToBingLinChengXia",
 		};
 		jump(BINGLINCHENGXIAURL, data);
 	});
 	$(".e").click(function() {
-		window.location.href = "../part6/bingbuxuerenzhuyemian.jsp";
+		var data = {
+			operateType : "zhukongToBingBuXueRen",
+		};
+		jump(BINGBUXUERENURL, data);
+		// window.location.href = "../part6/bingbuxuerenzhuyemian.jsp";
 	});
 
 });

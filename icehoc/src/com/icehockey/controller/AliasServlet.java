@@ -118,18 +118,15 @@ public class AliasServlet extends HttpServlet {
 				writer.println(
 						"<script language='javascript'>alert('新建球员失败');window.location.href='./views/part4/tianbingtianjiangzhuyemian.jsp'</script>");
 			}
-		} else if ("-1".equals(map.get("result"))) {// 登陆失败，用户名不存在
+		}else if ("-1".equals(map.get("result"))) {// 登陆失败，用户名不存在
 			writer.println(
 					"<script language='javascript'>alert('当前没有登录用户');window.location.href='./views/part1/zhucedengluyemian.jsp'</script>");
-
 		} else if ("-2".equals(map.get("result"))) {// 前端错误
 			writer.println(
-					"<script language='javascript'>alert('前端错误');window.location.href='history.back(-1);'</script>");
-
+					"<script language='javascript'>alert('前端错误');window.location.href='./views/error/qianduanError.jsp'</script>");
 		} else if ("-3".equals(map.get("result"))) {// 插入失败
 			writer.println(
-					"<script language='javascript'>alert('插入失败');window.location.href='history.back(-1);'</script>");
-
+					"<script language='javascript'>alert('插入失败');window.location.href='./views/error/insertError.jsp'</script>");
 		} else if ("-4".equals(map.get("result"))) {// 插入失败
 			writer.println(
 					"<script language='javascript'>alert('身份证号码已存在');window.location.href='./views/part4/alias.jsp'</script>");
