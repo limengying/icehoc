@@ -13,14 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.icehockey.entity.Club;
-import com.icehockey.entity.DuiKang;
 import com.icehockey.entity.Rink;
 import com.icehockey.entity.SaiShiInfo;
 import com.icehockey.entity.SchoolTeam;
 import com.icehockey.entity.User;
 import com.icehockey.service.ClubService;
 import com.icehockey.service.CompetitionService;
-import com.icehockey.service.DuiKangService;
 import com.icehockey.service.RinkService;
 import com.icehockey.service.SaiShiInfoService;
 import com.icehockey.service.SchoolTeamService;
@@ -55,18 +53,16 @@ public class BingTianXueDiServlet extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("-----------------冰天雪地后台程序----------");
 
-		DuiKangService duiKangService = new DuiKangService();
 		ClubService clubService = new ClubService();
 		RinkService rinkService=new RinkService();
 		SchoolTeamService schoolTeamService = new SchoolTeamService();
 		CompetitionService competitionService=new CompetitionService();
 		SaiShiInfoService saiShiInfoService=new SaiShiInfoService();
 		User user = null;
+		System.out.println(user);
 		Club club = null;
 		SchoolTeam schoolTeam = null;
-		DuiKang duiKang = null;
 		SaiShiInfo saiShiInfo = null;
-		List<DuiKang> duiKangs = null;
 		List<Club> clubs = null;
 		List<Rink> rinks = null;
 		List<SchoolTeam> schoolTeams = null;

@@ -38,6 +38,18 @@
 					<option value='7'>裆下</option>
 				</select>
 			</div>
+			<div class="">
+				<div class="a">门将防守方式:</div>
+				<select data-role='none' class="option" placeholder=""
+					id="menjiangfangshoufangshi">
+					<option value='1'>鸭爪抓球</option>
+					<option value='2'>挡板挡球</option>
+					<option value='3'>身体挡球</option>
+					<option value='4'>双手扣球</option>
+					<option value='5'>单手扣球</option>
+					<option value='6'>反弹球控制</option>
+				</select>
+			</div>
 
 			<div class="">
 				<div class="a">门将移动方式:</div>

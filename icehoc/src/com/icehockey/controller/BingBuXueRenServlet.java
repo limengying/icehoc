@@ -13,18 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.icehockey.entity.Club;
 import com.icehockey.entity.DuiKang;
 import com.icehockey.entity.Player;
-import com.icehockey.entity.Rink;
-import com.icehockey.entity.SaiShiInfo;
 import com.icehockey.entity.User;
-import com.icehockey.service.ClubService;
-import com.icehockey.service.CompetitionService;
 import com.icehockey.service.DuiKangService;
 import com.icehockey.service.PlayerService;
-import com.icehockey.service.RinkService;
-import com.icehockey.service.SaiShiInfoService;
+import com.icehockey.service.StatisticService;
 
 /**
  * Servlet implementation class BingBuXueRenServlet
@@ -57,19 +51,13 @@ public class BingBuXueRenServlet extends HttpServlet {
 		System.out.println("-----------------冰步雪刃后台程序----------");
 
 		DuiKangService duiKangService = new DuiKangService();
-		ClubService clubService = new ClubService();
-		RinkService rinkService = new RinkService();
 		PlayerService playerService = new PlayerService();
-		CompetitionService competitionService = new CompetitionService();
-		SaiShiInfoService saiShiInfoService = new SaiShiInfoService();
+		StatisticService statisticService = new StatisticService();
 
 		User user = null;
 		Player player = null;
 		List<Player> players = null;
-		List<SaiShiInfo> saiShiInfos = null;
 		List<DuiKang> duiKangs = null;
-		List<Club> clubs = null;
-		List<Rink> rinks = null;
 		System.out.println("跳转后的sessionId :" + session.getId());
 		String operateType = null;
 		// session
@@ -105,19 +93,14 @@ public class BingBuXueRenServlet extends HttpServlet {
 					map.put("duiKangs", duiKangs);
 					map.put("result", "0");
 					map.put("ok", "2");
-
 				} else if ("shujvcaijixuanzesaishi".equals(operateType)) {// 如果操作类型是数据采集-赛事选择
 					int competitionId = Integer.parseInt(request.getParameter("competitionId"));
+
 					if (session.getAttribute("player") != null) {
 						player = (Player) session.getAttribute("player");
-						if (player.getCategoryId() == 901) {
-							map.put("query", "1");// 球员
-						} else if (player.getCategoryId() == 902) {
-							map.put("query", "2");// 守门员
-						} else {
+						if (player.getCategoryId() == -2) {
 							map.put("query", "3");// 未查到类别
 						}
-
 					} else {
 						map.put("query", "4");// 未查到球员
 					}
@@ -126,6 +109,57 @@ public class BingBuXueRenServlet extends HttpServlet {
 					map.put("result", "0");
 					map.put("ok", "3");
 
+				} else if ("bingmianxuandian".equals(operateType)) {// 如果操作类型是数据采集-赛事选择
+					String type = request.getParameter("type");
+					int competitionId = (int) session.getAttribute("competitionId");// 赛事编号
+					int playerId = (int) session.getAttribute("playerId");// 球员编号
+					player = playerService.getPlayerByPlayerId(playerId);
+					if (player.getCategoryId() == 901) {
+						map.put("query", "1");// 球员
+					} else if (player.getCategoryId() == 902) {
+						map.put("query", "2");// 守门员
+					}
+					if ("shemen".equals(type)) {// 跳转至射门页面
+						map.put("tiaozhuan", "1");
+						map.put("result", "0");
+						map.put("ok", "4");
+					} else if ("zhugong".equals(type)) {// 插入一条助攻记录
+						boolean f = statisticService.addZhuGongRecord(competitionId, playerId, "1");
+						if (f) {
+							map.put("tiaozhuan", "2");
+							map.put("result", "0");
+							map.put("ok", "4");
+						} else {
+							map.put("result", "-3");
+						}
+					} else {// 插入一条犯规记录
+						boolean f = statisticService.addFanGuiRecord(competitionId, playerId, "1");
+						if (f) {
+							map.put("tiaozhuan", "2");
+							map.put("result", "0");
+							map.put("ok", "4");
+						} else {
+							map.put("result", "-3");
+						}
+					}
+				} else if ("lurumenjiangshujv".equals(operateType)) {// 如果操作类型是数据采集-赛事选择
+					int competitionId = (int) session.getAttribute("competitionId");// 赛事编号
+					int playerId = (int) session.getAttribute("playerId");// 球员编号
+					String attackingPosi = request.getParameter("bingqiurushefangwei");// 冰球入射方位
+					String guardType = request.getParameter("menjiangfangshoufangshi");// 门将防守方式
+					String skatingType = request.getParameter("menjiangyidong");// 门将移动方式
+					String attackingType = request.getParameter("qiuyuanjingong");// 球员进攻方式
+					String ballArmFace = request.getParameter("zhengganfangan");// 正杆反杆
+					String matchInTime = request.getParameter("bisaijieduan");// 比赛阶段
+					String isGoal = request.getParameter("jinqiushifou");// 是否进球
+					boolean f = statisticService.addRecord(competitionId, playerId, attackingPosi, guardType,
+							skatingType, attackingType, ballArmFace, matchInTime, isGoal);
+					if (f) {
+						map.put("result", "0");
+						map.put("ok", "5");
+					} else {
+						map.put("result", "-3");
+					}
 				}
 			} else {
 				map.put("result", "-2");// 没有操作类型
@@ -140,27 +174,32 @@ public class BingBuXueRenServlet extends HttpServlet {
 						"<script language='javascript'>window.location.href='./views/part6/bingbuxuerenzhuyemian.jsp'</script>");
 			} else if ("2".equals(map.get("ok"))) {
 				if ("3".equals(map.get("query"))) {
-					writer.println("<script language='javascript'>alert('该远动员角色不是球员或者守门员，请前往添兵添将修改！');</script>");
-				}
-				writer.println(
-						"<script language='javascript'>window.location.href='./views/part6/saishixuanze.jsp'</script>");
-			} else if ("3".equals(map.get("ok"))) {
-				if ("1".equals(map.get("query"))) {
-					writer.println(
-							"<script language='javascript'>window.location.href='./views/part6/qiuyuanjishutongji.jsp'</script>");
-				} else if ("2".equals(map.get("query"))) {
-					writer.println(
-							"<script language='javascript'>window.location.href='./views/part6/menjiangjishutongji.jsp'</script>");
-				} else if ("3".equals(map.get("query"))) {
 					writer.println(
 							"<script language='javascript'>alert('该远动员角色不是球员或者守门员，请前往添兵添将修改！');window.location.href='./views/part6/bingbuxuerenzhuyemian.jsp'</script>");
-				} else if ("4".equals(map.get("query"))) {
+				} else {
 					writer.println(
-							"<script language='javascript'>alert('session保存出错！');window.location.href='./views/part6/bingbuxuerenzhuyemian.jsp'</script>");
+							"<script language='javascript'>window.location.href='./views/part6/saishixuanze.jsp'</script>");
 				}
-
+			} else if ("3".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>window.location.href='./views/part6/bingmianxuandian.jsp'</script>");
+			} else if ("4".equals(map.get("ok"))) {
+				if ("2".equals(map.get("tiaozhuan"))) {
+					writer.println(
+							"<script language='javascript'>alert('助攻或犯规录入成功');window.location.href='./views/part6/bingmianxuandian.jsp'</script>");
+				} else {
+					if ("1".equals(map.get("query"))) {
+						writer.println(
+								"<script language='javascript'>window.location.href='./views/part6/qiuyuanjishutongji.jsp'</script>");
+					} else if ("2".equals(map.get("query"))) {
+						writer.println(
+								"<script language='javascript'>window.location.href='./views/part6/menjiangjishutongji.jsp'</script>");
+					}
+				}
+			} else if ("5".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>alert('射门记录录入成功！');window.location.href='./views/part6/bingmianxuandian.jsp'</script>");
 			}
-
 		} else if ("-1".equals(map.get("result"))) {// 登陆失败，用户名不存在
 			writer.println(
 					"<script language='javascript'>alert('当前没有登录用户');window.location.href='./views/part1/zhucedengluyemian.jsp'</script>");
@@ -180,7 +219,6 @@ public class BingBuXueRenServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

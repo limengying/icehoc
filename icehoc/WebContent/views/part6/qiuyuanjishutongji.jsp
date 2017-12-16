@@ -21,8 +21,8 @@
 <body>
 	<div data-role="page" class="allpage">
 		<div class="top">
-			<div onClick="javascript :history.back(-1);"
-				data-ajax="false" class="back">
+			<div onClick="javascript :history.back(-1);" data-ajax="false"
+				class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
 			<div class="biaoti">球员技术统计</div>
@@ -41,7 +41,18 @@
 					<option value='7'>裆下</option>
 				</select>
 			</div>
-
+			<div class="">
+				<div class="a">门将防守方式:</div>
+				<select data-role='none' class="option" placeholder=""
+					id="menjiangfangshoufangshi">
+					<option value='1'>鸭爪抓球</option>
+					<option value='2'>挡板挡球</option>
+					<option value='3'>身体挡球</option>
+					<option value='4'>双手扣球</option>
+					<option value='5'>单手扣球</option>
+					<option value='6'>反弹球控制</option>
+				</select>
+			</div>
 			<div class="">
 				<div class="a">门将移动方式:</div>
 				<select data-role='none' class="option" placeholder=""

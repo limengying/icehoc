@@ -8,7 +8,7 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>冰步雪刃</title>
+<title>冰步雪刃主页面</title>
 <link rel="stylesheet" href="../../css/part6/bingbuxuerenzhuyemian.css" />
 <link rel="stylesheet"
 	href="../../css/jqueryMobile/jquery.mobile-1.4.5.min.css" />
@@ -27,19 +27,21 @@
 		</div>
 
 		<div class="button2">
-			<div id="xunlian" onclick="xunlianClick()">训练</div>
-			<div id="bisai" onclick="bisaiClick()">比赛</div>
+			<div id="xunlian" name="button2" onclick="xunlianClick()" isCheck="">
+				训练</div>
+			<div id="bisai" name="button2" onclick="bisaiClick()" isCheck="">
+				比赛</div>
 		</div>
+
 
 		<div class="renyuanxuanze">人员选择</div>
 
 		<div class="renyuan">
-
 			<c:choose>
 				<c:when test="${!empty players}">
 					<c:forEach items="${players}" var="player" varStatus="st">
 						<input type="hidden" value="${player.playerId}" id="playerId" />
-						<div class="everyone_div" name="everyone_div" onclick="goto1('${player.playerId}')">
+						<div class="everyone_div" playerId = "${player.playerId}">
 							<div class="image">
 								<c:if test="${player.sex eq true}">
 									<img src="../../img/part4/man.png" />
@@ -56,8 +58,12 @@
 					<P class="tishi">没有记录</P>
 				</c:otherwise>
 			</c:choose>
+
 		</div>
-		<div class="button3" onclick="xiayibuClick()">下一步</div>
+		<div class="button3" id="next">下一步</div>
+
+
+
 		<div class="button">
 			<div class="shouye" onclick="shouyeClick()">
 				<span>首页</span>
@@ -72,7 +78,9 @@
 				<span>我的</span>
 			</div>
 		</div>
+
 	</div>
+
 </body>
 
 <script src="../../js/common/common.js"></script>

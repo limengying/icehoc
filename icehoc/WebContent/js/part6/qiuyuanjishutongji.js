@@ -4,11 +4,12 @@ $(function() {
 	});
 
 	$(".backButton").click(function(){
-		//jump(, data);
+		 window.location.href = "../part6/bingmianxuandian.jsp";
 	})
 		
 	$(".nextButton").click(function() {
 		var bingqiurushefangwei = $("#bingqiurushefangwei").val();
+		var menjiangfangshoufangshi = $("#menjiangfangshoufangshi").val();
 		var menjiangyidong = $("#menjiangyidong").val();
 		var qiuyuanjingong = $("#qiuyuanjingong").val();
 		var zhengganfangan = $("#zhengganfangan").val();
@@ -19,7 +20,10 @@ $(function() {
 			alert("请选择冰球入射方位");
 			return false;
 		}
-
+		if (menjiangfangshoufangshi == "") {
+			alert("请选择门将防守方式");
+			return false;
+		}
 		if (menjiangyidong == "") {
 			alert("请选择门将移动方式");
 			return false;
@@ -44,8 +48,9 @@ $(function() {
 		}
 	
 		var data = {
-			operateType : "",
+			operateType : "lurumenjiangshujv",
 			bingqiurushefangwei : bingqiurushefangwei,
+			menjiangfangshoufangshi:menjiangfangshoufangshi,
 			menjiangyidong : menjiangyidong,
 			qiuyuanjingong : qiuyuanjingong,
 			zhengganfangan :zhengganfangan,
@@ -53,6 +58,6 @@ $(function() {
 			jinqiushifou : jinqiushifou
 		};
 		alert(JSON.stringify(data));
-		//jump(, data);
+		jump(BINGBUXUERENURL, data);
 	});
 });
