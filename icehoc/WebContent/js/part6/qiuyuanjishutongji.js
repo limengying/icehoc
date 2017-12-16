@@ -57,7 +57,7 @@ $(function() {
 			bisaijieduan:bisaijieduan,
 			jinqiushifou : jinqiushifou
 		};
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		jump(BINGBUXUERENURL, data);
 	});
 });
