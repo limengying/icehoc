@@ -8,7 +8,7 @@ function goto1(para1) {
 			operateType : "shujvcaijixuanzesaishi",
 			competitionId : para1
 		};
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		jump(BINGBUXUERENURL, data);
 	}, function() {
 
