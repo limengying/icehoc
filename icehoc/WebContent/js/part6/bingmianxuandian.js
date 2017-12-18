@@ -18,21 +18,38 @@ $(function() {
 	})
 
 	$("#zhugong").click(function() {
-		var data = {
+		   layer.confirm('你将选择添加一次助攻', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+        	var playerId = $(".playerId").val();
+			var data = {
 			operateType : "bingmianxuandian",
 			type : "zhugong"
 		};
 		//alert(JSON.stringify(data));
 		jump(BINGBUXUERENURL, data);
+			
+        }, function(){
+            
+        });	
 	})
-
+	
 	$("#fangui").click(function() {
-		var data = {
+		   layer.confirm('你将选择添加一次犯规', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+        	var playerId = $(".playerId").val();
+			var data = {
 			operateType : "bingmianxuandian",
 			type : "fangui"
 		};
 		//alert(JSON.stringify(data));
 		jump(BINGBUXUERENURL, data);
+			
+        }, function(){
+            
+        });	
 	})
+
 
 });

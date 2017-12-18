@@ -186,7 +186,7 @@ public class BingBuXueRenServlet extends HttpServlet {
 			} else if ("4".equals(map.get("ok"))) {
 				if ("2".equals(map.get("tiaozhuan"))) {
 					writer.println(
-							"<script language='javascript'>alert('助攻或犯规录入成功');window.location.href='./views/part6/bingmianxuandian.jsp'</script>");
+							"<script language='javascript'>window.location.href='./views/part6/bingmianxuandian.jsp'</script>");
 				} else {
 					if ("1".equals(map.get("query"))) {
 						writer.println(
