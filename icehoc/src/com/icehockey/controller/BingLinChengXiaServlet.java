@@ -82,6 +82,16 @@ public class BingLinChengXiaServlet extends HttpServlet {
 					map.put("result", "0");
 					map.put("ok", "1");
 
+				}else if ("BingLinChengXia".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
+					duiKangs = duiKangService.getDuiKangs(user.getUserId());
+					saiShiInfos=saiShiInfoService.getSaiShiInfosUserFollow(user.getUserId());
+					session.setAttribute("duiKangs", duiKangs);
+					session.setAttribute("saiShiInfos", saiShiInfos);
+					map.put("saiShiInfos", saiShiInfos);
+					map.put("duiKangs", duiKangs);
+					map.put("result", "0");
+					map.put("ok", "1");
+
 				} else if ("tianjianxunliansai".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
 					rinks = rinkService.getRinks();
 					clubs = clubService.getAll();
