@@ -141,7 +141,7 @@
 	height: 3rem;
     min-height: 3em;
     font-size: 2rem;
-    color: #fff;
+    color: black;
     text-shadow:none !important;
     margin-left: 5%;
     
@@ -155,7 +155,7 @@
 	height: 3rem;
     min-height: 3em;
     font-size: 2rem;
-    color: #fff;
+     color: black;
     text-shadow:none !important;
     margin-left: 5%;
     
@@ -164,7 +164,7 @@
 /*出错界面*/
 .errorBtn {
   margin-top: 1.3rem;
-  color: #ffffff;
+  color: black;
   float: right;
   margin-right: 2.0rem;
   text-decoration: none;
@@ -179,7 +179,9 @@
   clear: both;
   text-shadow:none !important;
   font-size: 2rem;
-  color: rgb(178,196,202);
+  color:black;
+  
+
 
 }
 

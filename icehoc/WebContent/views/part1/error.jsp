@@ -26,7 +26,7 @@
 				data-ajax="false" class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
-			<div class="biaoti">登录遇到的问题:</div>
+			<div class="biaoti">登录遇到的问题</div>
 		</div>
 
 		<div class="content">

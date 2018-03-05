@@ -10,7 +10,7 @@
 
 
 .change_image{
-	color: white;
+	color: black;
 }
 
 .uploadImg{ 
@@ -37,7 +37,7 @@
 
 .content_div{
 	display: flex;
-	color: white;
+	color: black;
 	margin: 2%;
 }
 

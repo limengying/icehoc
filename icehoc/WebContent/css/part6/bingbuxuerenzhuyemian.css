@@ -1,6 +1,6 @@
 
 .button2{
-	color: white;
+	color: black;
 	text-shadow: none;
 	display: flex;
 	width: 50%;
@@ -27,7 +27,7 @@ font-size: 2.5rem;
 
 .renyuanxuanze{
 	text-shadow: none;
-	color:white;
+	color:black;
 	text-align: center;
 	font-size: 2rem;
 
@@ -58,7 +58,7 @@ font-size: 2.5rem;
 }
 
 .name{
-	color: white;
+	color: black;
 	text-align: center;
 }
 

@@ -30,7 +30,7 @@
 
 .card{
 	width: 90%;
-	color:white;
+	color:black;
 	margin: auto;
 	margin-top: 5%;
 	display: flex;
@@ -74,7 +74,7 @@
 .list{
 	width: 90%;
 	margin: auto;
-	color: white;
+	color: black;
 
 	
 }

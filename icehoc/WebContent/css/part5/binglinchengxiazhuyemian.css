@@ -16,7 +16,7 @@
 	background:transparent;
 	margin-top: 3%;
 	display: flex;
-	color: white;
+	color: black;
 }
 
 
@@ -43,7 +43,7 @@
 	background:whitesmoke ;
 	border-style:solid; 
 	border-width:1px; 
-	border-color:#000;
+	border-color:black;
 	margin: 0rem!important;
 	padding:1%;
 }
