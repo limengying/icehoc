@@ -17,12 +17,11 @@ public class CheckDao {
 	private PreparedStatement preparedStatement = null;
 
 	public Check getCheckRecord(int flag, int flagNo) {
-		String sql = "SELECT * FROM check WHERE check.flag = ? and check.flagNo = ?";
+		String sql = "SELECT * FROM `check` WHERE `check`.flag = " + flag + " and `check`.flagNo = " + flagNo;
+		System.out.println(sql);
 		try {
 			conn = util.openConnection();
 			preparedStatement = conn.prepareStatement(sql);
-			preparedStatement.setInt(1, flag);
-			preparedStatement.setInt(2, flagNo);
 			rs = preparedStatement.executeQuery();
 			if (rs.next()) {
 
@@ -67,16 +66,18 @@ public class CheckDao {
 		try {
 			// 获取数据库链接
 			conn = util.openConnection();
-			String sql1 = "INSERT INTO check (id, flag, flagNo, checkReslut, reason, checkDate, userId, remark)VALUES (" + check2.getId() + "," + check2.getFlag()
-					+ "," + check2.getFlagNo()+ "," + check2.getCheckDate()+ "," + check2.getReason()+ "," + check2.getCheckDate()+ "," + check2.getUserId()+ "," + check2.getRemark() + ")";
+			String sql1 = "INSERT INTO `check` (`check`.flag,`check`.flagNo,`check`.checkReslut,`check`.reason,`check`.checkDate,`check`.userId,`check`.remark)VALUES ( "
+					+ check2.getFlag() + "," + check2.getFlagNo() + "," + check2.isCheckReslut() + ",'"
+					+ check2.getReason() + "','" + check2.getCheckDate() + "'," + check2.getUserId() + ",'"
+					+ check2.getRemark() + "')";
 			System.out.println("sql1:  " + sql1);
 			// 执行SQL1语句
 			preparedStatement = conn.prepareStatement(sql1);
 			int row1 = preparedStatement.executeUpdate(sql1);
-			if(row1==1){
+			if (row1 == 1) {
 				return true;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -103,13 +104,14 @@ public class CheckDao {
 		try {
 			// 获取数据库链接
 			conn = util.openConnection();
-			String sql1 = "UPDATE check SET checkReslut = " + check2.isCheckReslut() + ", reason = " + check2.getReason()
-					+ " ,checkDate =" + check2.getCheckDate()+ " , userId =" + check2.getUserId() + "WHERE id = " + id;
+			String sql1 = "UPDATE `check` SET `check`.checkReslut = " + check2.isCheckReslut() + ",`check`. reason = '"
+					+ check2.getReason() + " ',`check`.checkDate ='" + check2.getCheckDate() + "' , `check`.userId ="
+					+ check2.getUserId() + " WHERE `check`.id = " + id;
 			System.out.println("sql1:  " + sql1);
 			// 执行SQL1语句
 			preparedStatement = conn.prepareStatement(sql1);
 			int row1 = preparedStatement.executeUpdate(sql1);
-			if(row1==1){
+			if (row1 == 1) {
 				return true;
 			}
 		} catch (Exception e) {

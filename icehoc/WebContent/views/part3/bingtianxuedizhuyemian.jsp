@@ -26,7 +26,7 @@
 				class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
-			<div class="biaoti">冰天雪地</div>
+			<div class="biaoti">冰天雪地(俱乐部)</div>
 		</div>
 		<!--查询框-->
 		<div class="search_a">

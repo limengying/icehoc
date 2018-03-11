@@ -28,7 +28,6 @@
 					<div class="bingchang"><span>冰场</span></div>
 					<div class="club"><span>俱乐部</span></div>
 					<div class="xiaodui"><span>校队</span></div>
-					<div class="saishi"><span>赛事</span></div>
 				</div>
 			</div>
 				

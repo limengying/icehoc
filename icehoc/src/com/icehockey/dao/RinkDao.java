@@ -297,12 +297,11 @@ public class RinkDao {
 		return null;
 	}
 	public boolean rinkCheck(int rinkId, int checkId) {//重置审核标志
-		String sql ="UPDATE rink SET checkId=? WHERE rinkId=?;";
+		String sql ="UPDATE rink SET checkId="+checkId+" WHERE rinkId="+rinkId;
+		System.out.println(sql);
 		try {
 			conn = util.openConnection();
 			preparedStatement = conn.prepareStatement(sql);
-//			preparedStatement.setInt(1, rink.getCheckId());
-			preparedStatement.setInt(1, rinkId);
 			int flag = preparedStatement.executeUpdate(sql);
 			if (flag==1) {
 				System.out.println(rink.getCheckId());

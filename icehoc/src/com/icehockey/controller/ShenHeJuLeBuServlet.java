@@ -43,52 +43,51 @@ public class ShenHeJuLeBuServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		PrintWriter writer = response.getWriter();
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("-----------------ÉóºË¾ãÀÖ²¿ºóÌ¨³ÌÐò----------");
+		System.out.println("-----------------ï¿½ï¿½Ë¾ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½----------");
 
 		ClubService clubService = new ClubService();;
 		User user = null;
 		System.out.println(user);
 		Club club = null;
 		List<Club> clubs = null;
-		System.out.println("Ìø×ªºóµÄsessionId :" + session.getId());
+		System.out.println("ï¿½ï¿½×ªï¿½ï¿½ï¿½sessionId :" + session.getId());
 		String operateType = null;
 		// session
 		if (session.getAttribute("user") == null) {
 			user = null;
-			map.put("result", "-1");// Ã»ÓÐÓÃ»§µÇÂ¼
+			map.put("result", "-1");// Ã»ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Â¼
 		} else {
 			user = (User) session.getAttribute("user");
 			if (request.getParameter("operateType") != null) {
 				operateType = request.getParameter("operateType");
-				if ("shenheToshenhejulebu".equals(operateType)) {// Ìø×ªµ½ÉóºË¾ãÀÖ²¿½çÃæ
+				if ("shenheToshenhejulebu".equals(operateType)) {// ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ë¾ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½
 					clubs = clubService.getAll();
 					session.setAttribute("clubs", clubs);
 					map.put("result", "0");
 					map.put("ok", "1");
 
-				} else if ("julebutongguo".equals(operateType)) {// ¾ãÀÖ²¿ÉóºËÍ¨¹ý²Ù×÷
+				} else if ("julebutongguo".equals(operateType)) {// ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if (request.getParameter("clubId") != null) {
 					String clubId = request.getParameter("clubId");
 					club = clubService.queryClubByClubId(Integer.parseInt(clubId));
 					club.setCheckId(1);
-					clubService.resetcheckId(club);
+					clubService.clubCheckOK(user.getUserId(), club.getClubId());
 					clubs=clubService.getAll();
 					session.setAttribute("clubs", clubs);
 					map.put("result", "0");
 					map.put("ok", "2");
 					}
-				}else if ("julebubohui".equals(operateType)) {// ¾ãÀÖ²¿ÉóºË²µ»Ø²Ù×÷
+				}else if ("julebubohui".equals(operateType)) {// ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Ë²ï¿½ï¿½Ø²ï¿½ï¿½ï¿½
 					if (request.getParameter("clubId") != null) {
 					String clubId = request.getParameter("clubId");
 					club = clubService.queryClubByClubId(Integer.parseInt(clubId));
-					club.setCheckId(0);
-					clubService.resetcheckId(club);
+					clubService.clubCheckRefused(user.getUserId(), club.getClubId());
 					clubs=clubService.getAll();
 					session.setAttribute("clubs", clubs);
 					map.put("result", "0");
 					map.put("ok", "2");
 					}
-				}  else if ("shenhejulebuTojulebuxiangxi".equals(operateType)) {// ÉóºË¾ãÀÖ²¿½çÃæÌø×ªµ½ÉóºË¾ãÀÖ²¿ÏêÏ¸ÐÅÏ¢½çÃæ
+				}  else if ("shenhejulebuTojulebuxiangxi".equals(operateType)) {// ï¿½ï¿½Ë¾ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ë¾ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 					int clubId = Integer.parseInt(request.getParameter("searchId"));
 					club = clubService.queryClubByClubId(clubId);
 					session.setAttribute("club", club);
@@ -96,13 +95,13 @@ public class ShenHeJuLeBuServlet extends HttpServlet {
 					map.put("ok", "5");
 				}
 			} else {
-				map.put("result", "-2");// Ã»ÓÐ²Ù×÷ÀàÐÍ
+				map.put("result", "-2");// Ã»ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 		}
 
-		// ¸ù¾ÝresultÖµ£¬ÅÐ¶ÏÒ³ÃæÈçºÎÌø×ª
-		if ("0".equals(map.get("result"))) {// µÇÂ¼³É¹¦£¬ÇÒ²»ÊÇµÚÒ»´ÎµÇÂ½
-			System.out.println("Ò³Ãæ²Ù×÷ÕýÈ·");
+		// ï¿½ï¿½ï¿½ï¿½resultÖµï¿½ï¿½ï¿½Ð¶ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
+		if ("0".equals(map.get("result"))) {// ï¿½ï¿½Â¼ï¿½É¹ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½Çµï¿½Ò»ï¿½Îµï¿½Â½
+			System.out.println("Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·");
 			if ("1".equals(map.get("ok"))) {
 				writer.println(
 						"<script language='javascript'>window.location.href='./views/part1/shenhejulebu.jsp'</script>");
@@ -112,15 +111,15 @@ public class ShenHeJuLeBuServlet extends HttpServlet {
 			}else if ("5".equals(map.get("ok"))) {
 				writer.println("<script language='javascript'>window.location.href='./views/part1/shenhejulebuxiangxixinxi.jsp'</script>");
 			}
-		} else if ("-1".equals(map.get("result"))) {// µÇÂ½Ê§°Ü£¬ÓÃ»§Ãû²»´æÔÚ
+		} else if ("-1".equals(map.get("result"))) {// ï¿½ï¿½Â½Ê§ï¿½Ü£ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			writer.println(
-					"<script language='javascript'>alert('µ±Ç°Ã»ÓÐµÇÂ¼ÓÃ»§');window.location.href='./views/part1/zhucedengluyemian.jsp'</script>");
-		} else if ("-2".equals(map.get("result"))) {// Ç°¶Ë´íÎó
+					"<script language='javascript'>alert('ï¿½ï¿½Ç°Ã»ï¿½Ðµï¿½Â¼ï¿½Ã»ï¿½');window.location.href='./views/part1/zhucedengluyemian.jsp'</script>");
+		} else if ("-2".equals(map.get("result"))) {// Ç°ï¿½Ë´ï¿½ï¿½ï¿½
 			writer.println(
-					"<script language='javascript'>alert('Ç°¶Ë´íÎó');window.location.href='./views/error/qianduanError.jsp'</script>");
-		} else if ("-3".equals(map.get("result"))) {// ²åÈëÊ§°Ü
+					"<script language='javascript'>alert('Ç°ï¿½Ë´ï¿½ï¿½ï¿½');window.location.href='./views/error/qianduanError.jsp'</script>");
+		} else if ("-3".equals(map.get("result"))) {// ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 			writer.println(
-					"<script language='javascript'>alert('²åÈëÊ§°Ü');window.location.href='./views/error/insertError.jsp'</script>");
+					"<script language='javascript'>alert('ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½');window.location.href='./views/error/insertError.jsp'</script>");
 		}
 		}
 

@@ -27,7 +27,7 @@
 				class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
-			<div class="biaoti">冰天雪地</div>
+			<div class="biaoti">冰天雪地(赛事)</div>
 		</div>
 
 		<!--查询框-->
@@ -70,10 +70,10 @@
 		<!--导航栏下面内容-->
 		<div data-role="content" class="all">
 			<c:choose>
-				<c:when test="${!empty saiShiInfos}">
-					<c:forEach items="${saiShiInfos}" var="saiShiInfo" varStatus="st">
+				<c:when test="${!empty matchs}">
+					<c:forEach items="${matchs}" var="saiShiInfo" varStatus="st">
 						<div class="everyone"
-							onclick="goto1('${saiShiInfo.id}','competition')" id="competition">
+							onclick="goto1('${saiShiInfo.competitionId}','competition')" id="competition">
 							<div class="name">${saiShiInfo.competitionName}</div>
 							<div class="introduce">比赛时间： ${saiShiInfo.pkDate}</div>
 							<div class="introduce">相关信息：${saiShiInfo.clubAName}VS${saiShiInfo.clubBName}</div>

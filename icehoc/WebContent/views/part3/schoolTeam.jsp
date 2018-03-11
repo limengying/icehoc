@@ -31,9 +31,9 @@
 		</div>
 
 		<div data-role="content" class="all">
-			<div class="name">${schoolTeam.teamName}</div>
-			<div class="introduce">成立时间： ${schoolTeam.buildTime}</div>
-			<div class="introduce">简介:${schoolTeam.construction}</div>
+			<div class="name">${team.teamName}</div>
+			<div class="introduce">成立时间： ${team.buildTime}</div>
+			<div class="introduce">简介:${team.construction}</div>
 		</div>
 
 		<div class="button">

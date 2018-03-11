@@ -53,8 +53,8 @@ public class ClubDao {
 				String construction = rs.getString("construction"); // 球队建设
 				int provinceId = rs.getInt("provinceId"); // 省份
 				String remark = rs.getString("remark"); // 备注
-				String businessLicense = rs.getString("province"); // 省份
-				String idCardCopyFile = rs.getString("remark"); // 备注
+				String businessLicense = rs.getString("businessLicense"); // 省份
+				String idCardCopyFile = rs.getString("idCardCopyFile"); // 备注
 				int checkId = rs.getInt("checkId");//审核标志
 				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, provinceId, cityId, managerContent, email, construction, remark, businessLicense, idCardCopyFile, checkId);
 				System.out.println(club);
@@ -169,8 +169,8 @@ public class ClubDao {
 				String construction = rs.getString("construction"); // 球队建设
 				int provinceId = rs.getInt("provinceId"); // 省份
 				String remark = rs.getString("remark"); // 备注
-				String businessLicense = rs.getString("province"); // 省份
-				String idCardCopyFile = rs.getString("remark"); // 备注
+				String businessLicense = rs.getString("businessLicense"); // 省份
+				String idCardCopyFile = rs.getString("idCardCopyFile"); // 备注
 				int checkId = rs.getInt("checkId");//审核标志
 				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, provinceId, cityId, managerContent, email, construction, remark, businessLicense, idCardCopyFile, checkId);
 				System.out.println(club);
@@ -227,8 +227,8 @@ public class ClubDao {
 				String construction = rs.getString("construction"); // 球队建设
 				int provinceId = rs.getInt("provinceId"); // 省份
 				String remark = rs.getString("remark"); // 备注
-				String businessLicense = rs.getString("province"); // 省份
-				String idCardCopyFile = rs.getString("remark"); // 备注
+				String businessLicense = rs.getString("businessLicense"); // 省份
+				String idCardCopyFile = rs.getString("idCardCopyFile"); // 备注
 				int checkId = rs.getInt("checkId");//审核标志
 				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, provinceId, cityId, managerContent, email, construction, remark, businessLicense, idCardCopyFile, checkId);
 				System.out.println(club);
@@ -258,37 +258,6 @@ public class ClubDao {
 		return null;
 	}
 
-	public void resetclubcheckId(Club club) {//重置审核标志
-		String sql ="UPDATE club SET checkId=? WHERE clubId=?;";
-		try {
-			conn = util.openConnection();
-			preparedStatement = conn.prepareStatement(sql);
-//			preparedStatement.setInt(1, club.getCheckId());
-			preparedStatement.setInt(1, club.getCheckId());
-			int flag = preparedStatement.executeUpdate(sql);
-			if (flag>0) {
-				System.out.println(club.getCheckId());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			// 关闭Statement
-			try {
-				System.out.println("statement关闭");
-				preparedStatement.close();
-			} catch (Exception e) {
-				System.out.println("statement关闭失败");
-			}
-			// 关闭Connection
-			try {
-				System.out.println("conn关闭");
-				conn.close();
-			} catch (Exception e) {
-				System.out.println("conn关闭失败");
-			}
-		}
-	}
 	public boolean addClub(String clubName, String buildTime, String construction) {
 		String sql = "INSERT INTO club ( clubName, buildTime, construction ) " + "VALUES ( '" + clubName + "', '"
 				+ buildTime + "', '" + construction + "' )";
@@ -324,6 +293,40 @@ public class ClubDao {
 		}
 
 		return false;
+	}
+
+	public boolean clubCheck(int clubId, int checkId) {
+		String sql ="UPDATE club SET checkId="+checkId+" WHERE clubId="+clubId;
+		System.out.println(sql);
+		try {
+			conn = util.openConnection();
+			preparedStatement = conn.prepareStatement(sql);
+			int flag = preparedStatement.executeUpdate(sql);
+			if (flag==1) {
+				System.out.println(club.getCheckId());
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			// 关闭Statement
+			try {
+				System.out.println("statement关闭");
+				preparedStatement.close();
+			} catch (Exception e) {
+				System.out.println("statement关闭失败");
+			}
+			// 关闭Connection
+			try {
+				System.out.println("conn关闭");
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("conn关闭失败");
+			}
+		}
+		return false;
+		
 	}
 
 }

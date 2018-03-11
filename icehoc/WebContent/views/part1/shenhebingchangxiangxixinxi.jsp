@@ -74,8 +74,10 @@
 			<div class="content_div">冰面类型：${rink.iceType}</div>
 		</div>
 		
-		<button type="button" id="shenhe" value="${rink.rinkId}">通过审核</button>
-		<button type="button" id="bohui">驳回</button>
+		<c:if test="${rink.checkId eq -1}">
+			<button type="button" id="shenhe" value="${club.clubId}">通过审核</button>
+			<button type="button" id="bohui">驳回</button>
+		</c:if>
 	</div>
 
 <script src="../../js/common/common.js"></script>

@@ -33,11 +33,11 @@
 		<div data-role="content" class="all">
 			
 			<div class="name">
-				${saiShiInfo.competitionName}
+				${match.competitionName}
 			</div>
 			
 			<div class="introduce">
-				简介:${saiShiInfo.remark}
+				简介:${match.remark}
 			</div>
 		</div>
 

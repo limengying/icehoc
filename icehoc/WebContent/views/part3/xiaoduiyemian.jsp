@@ -28,7 +28,7 @@
 				class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
-			<div class="biaoti">冰天雪地</div>
+			<div class="biaoti">冰天雪地(校队)</div>
 		</div>
 
 		<!--查询框-->
@@ -72,8 +72,8 @@
 		<!--导航栏下面内容-->
 		<div data-role="content" class="all">
 			<c:choose>
-				<c:when test="${!empty schoolTeams}">
-					<c:forEach items="${schoolTeams}" var="schoolTeam" varStatus="st">
+				<c:when test="${!empty teams}">
+					<c:forEach items="${teams}" var="schoolTeam" varStatus="st">
 						<div class="everyone"
 							onclick="goto1('${schoolTeam.teamId}','schoolTeam')" id="schoolTeam">
 							<div class="name">${schoolTeam.teamName}</div>

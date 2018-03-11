@@ -38,9 +38,11 @@
 							<div class="name">${club.clubName}</div>
 							<div class="content_div">
 										是否审核:
-										<c:if test="${club.checkId eq 1}">已审核</c:if>
-										<c:if test="${club.checkId eq -1}">未审核</c:if>
-										<c:if test="${club.checkId eq 0}">驳回</c:if>
+										<c:choose>
+											<c:when test="${club.checkId eq 0}">驳回</c:when>
+											<c:when test="${club.checkId eq -1}">未审核</c:when>
+											<c:otherwise>已审核</c:otherwise>
+										</c:choose>
 									</div>
 							<div class="introduce">成立时间： ${club.buildTime}</div>
 						</div>

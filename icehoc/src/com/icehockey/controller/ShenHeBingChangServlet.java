@@ -47,7 +47,7 @@ public class ShenHeBingChangServlet extends HttpServlet {
 
 		RinkService rinkservice = new RinkService();
 		Rink rink = null;
-		User user=null;
+		User user = null;
 		List<Rink> rinks = null;
 		System.out.println("跳转前sessionId :" + session.getId());
 		String operateType = null;
@@ -78,64 +78,87 @@ public class ShenHeBingChangServlet extends HttpServlet {
 					}
 				} else if ("bingchangtongguo".equals(operateType)) {// ���ͨ������
 					if (request.getParameter("rinkId") != null) {
-						String rinkId =request.getParameter("rinkId");
+						String rinkId = request.getParameter("rinkId");
 						rink = rinkservice.getRinkByRinkId(Integer.parseInt(rinkId));
-						rinkservice.rinkCheckOK(user.getUserId(),rink.getRinkId());
-						rinks = rinkservice.getRinks();
-						session.setAttribute("rinks", rinks);
-						map.put("rinks", rinks);
-						map.put("result", "0");
-						map.put("ok", "3");
-						}else {
-							map.put("result", "-2");// û�в�������
-						}
-				 } else if ("bingchangbohui".equals(operateType)) {// ���ز���
-						if (request.getParameter("rinkId") != null) {
-							String rinkId =request.getParameter("rinkId");
-							rink = rinkservice.getRinkByRinkId(Integer.parseInt(rinkId));
-							rink.setCheckId(0);
-						//	rinkservice.resetcheckId(rink);
+						boolean f = rinkservice.rinkCheckOK(user.getUserId(), rink.getRinkId());
+						if (f) {
 							rinks = rinkservice.getRinks();
 							session.setAttribute("rinks", rinks);
 							map.put("rinks", rinks);
 							map.put("result", "0");
 							map.put("ok", "3");
-						}else {
+						}else{
+							rinks = rinkservice.getRinks();
+							session.setAttribute("rinks", rinks);
+							map.put("rinks", rinks);
+							map.put("result", "0");
+							map.put("ok", "4");
+						}
+						
+					} else {
+						map.put("result", "-2");// û�в�������
+					}
+				} else if ("bingchangbohui".equals(operateType)) {// ���ز���
+					if (request.getParameter("rinkId") != null) {
+						String rinkId = request.getParameter("rinkId");
+						rink = rinkservice.getRinkByRinkId(Integer.parseInt(rinkId));
+						boolean f = rinkservice.rinkCheckRefused(user.getUserId(), rink.getRinkId());
+						if (f) {
+							rinks = rinkservice.getRinks();
+							session.setAttribute("rinks", rinks);
+							map.put("rinks", rinks);
+							map.put("result", "0");
+							map.put("ok", "5");
+						}else{
+							rinks = rinkservice.getRinks();
+							session.setAttribute("rinks", rinks);
+							map.put("rinks", rinks);
+							map.put("result", "0");
+							map.put("ok", "6");
+						}
+					} else {
 						map.put("result", "-2");// û�в�������
 					}
 					System.out.println("map:" + map);
-				} 
+				}
 			} else {
-				map.put("result", "-2");// û�в�������
+				map.put("result", "-2");
 			}
 		}
-		// ����resultֵ���ж�ҳ�������ת
-		if ("0".equals(map.get("result"))) {// ��¼�ɹ����Ҳ��ǵ�һ�ε�½
-			System.out.println("ҳ�������ȷ");
+		
+		if ("0".equals(map.get("result"))) {//
 			if ("1".equals(map.get("ok"))) {
 				writer.println(
 						"<script language='javascript'>window.location.href='./views/part1/shenhebingchang.jsp'</script>");
 			} else if ("2".equals(map.get("ok"))) {
 				writer.println(
 						"<script language='javascript'>window.location.href='./views/part1/shenhebingchangxiangxixinxi.jsp'</script>");
-			}
-			else if ("3".equals(map.get("ok"))) {
+			} else if ("3".equals(map.get("ok"))) {
 				writer.println(
-						"<script language='javascript'>window.location.href='./views/part1/shenhebingchang.jsp'</script>");
+						"<script language='javascript'>alert('审核成功');window.location.href='./views/part1/shenhebingchang.jsp'</script>");
 			}
-		} else if ("-1".equals(map.get("result"))) {// ��½ʧ�ܣ��û���������
+			else if ("4".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>alert('审核失败');window.location.href='./views/part1/shenhebingchang.jsp'</script>");
+			}else if ("5".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>alert('驳回成功');window.location.href='./views/part1/shenhebingchang.jsp'</script>");
+			}
+			else if ("6".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>alert('驳回失败');window.location.href='./views/part1/shenhebingchang.jsp'</script>");
+			}
+		} else if ("-1".equals(map.get("result"))) {// 登陆失败，用户名不存在
 			writer.println(
-					"<script language='javascript'>alert('��ǰû�е�¼�û�');window.location.href='./views/part1/zhucedengluyemian.jsp'</script>");
-		} else if ("-2".equals(map.get("result"))) {// ǰ�˴���
+					"<script language='javascript'>alert('当前没有登录用户');window.location.href='./views/part1/zhucedengluyemian.jsp'</script>");
+		} else if ("-2".equals(map.get("result"))) {// 前端错误
 			writer.println(
-					"<script language='javascript'>alert('ǰ�˴���');window.location.href='./views/error/qianduanError.jsp'</script>");
-		} else if ("-3".equals(map.get("result"))) {// ����ʧ��
+					"<script language='javascript'>alert('前端错误');window.location.href='./views/error/qianduanError.jsp'</script>");
+		} else if ("-3".equals(map.get("result"))) {// 插入失败
 			writer.println(
-					"<script language='javascript'>alert('����ʧ��');window.location.href='./views/error/insertError.jsp'</script>");
+					"<script language='javascript'>alert('插入失败');window.location.href='./views/error/insertError.jsp'</script>");
 		}
-		}
-
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
