@@ -65,7 +65,7 @@ public class ShenHeXiaoDuiServlet extends HttpServlet {
 						String teamId = request.getParameter("teamId");
 						team = teamService.queryTeamByTeamId(Integer.parseInt(teamId));
 						team.setCheckId(1);
-						teamService.resetcheckId(team);
+						teamService.teamCheckOK(user.getUserId(), team.getTeamId());
 						teams = teamService.queryTeams();
 						session.setAttribute("teams", teams);
 						map.put("teams", teams);
@@ -79,7 +79,7 @@ public class ShenHeXiaoDuiServlet extends HttpServlet {
 						String schoolTeamId = request.getParameter("teamId");
 						team = teamService.queryTeamByTeamId(Integer.parseInt(schoolTeamId));
 						team.setCheckId(0);
-						teamService.resetcheckId(team);
+						teamService.teamCheckRefused(user.getUserId(), team.getTeamId());
 						teams = teamService.queryTeams();
 						session.setAttribute("teams", teams);
 						map.put("teams", teams);

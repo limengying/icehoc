@@ -32,14 +32,14 @@
 		</div>
 
 		<div data-role="content" class="all">
-			<div class="name">球队名：${schoolTeam.teamName}</div>
-			<div class="introduce">队长：${schoolTeam.leaderName}</div>
-			<div class="introduce">球队地址：${schoolTeam.teamAddress}</div>
-			<div class="introduce">成立时间： ${schoolTeam.buildTime}</div>
-			<div class="introduce">简介:${schoolTeam.construction}</div>
+			<div class="name">球队名：${team.teamName}南航冰球队</div>
+			<div class="introduce">队长：${team.leaderName}小明</div>
+			<div class="introduce">球队地址：${team.teamAddress}江苏省南京市</div>
+			<div class="introduce">成立时间： ${team.buildTime}2018年2月11日</div>
+			<div class="introduce">简介:${team.construction}1954年齐齐哈尔冰球队正式成立，参加每年的全国比赛，并逐渐成为国家的主力。以齐齐哈尔市队员为主的国家冰球队分别获得第一届、第二届亚冬会冠军；并代表中国7次打入世界锦标赛B组；齐齐哈尔先后为国家输入冰球队员500余人次。1956年，中国冰球队开始参加国际比赛</div>
 		</div>
-		<c:if test="${schoolTeam.checkId eq -1}">
-			<button type="button" id="shenhe" value="${club.clubId}">通过审核</button>
+		<c:if test="${team.checkId eq -1}">
+			<button type="button" id="shenhe" value="${team.teamId}">通过审核</button>
 			<button type="button" id="bohui">驳回</button>
 		</c:if>
 

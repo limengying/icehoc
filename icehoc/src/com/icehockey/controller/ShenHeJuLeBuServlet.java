@@ -21,19 +21,20 @@ import com.icehockey.service.ClubService;
  */
 public class ShenHeJuLeBuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ShenHeJuLeBuServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public ShenHeJuLeBuServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("application/json");
@@ -45,7 +46,8 @@ public class ShenHeJuLeBuServlet extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("-----------------��˾��ֲ���̨����----------");
 
-		ClubService clubService = new ClubService();;
+		ClubService clubService = new ClubService();
+		;
 		User user = null;
 		System.out.println(user);
 		Club club = null;
@@ -68,26 +70,26 @@ public class ShenHeJuLeBuServlet extends HttpServlet {
 
 				} else if ("julebutongguo".equals(operateType)) {// ���ֲ����ͨ������
 					if (request.getParameter("clubId") != null) {
-					String clubId = request.getParameter("clubId");
-					club = clubService.queryClubByClubId(Integer.parseInt(clubId));
-					club.setCheckId(1);
-					clubService.clubCheckOK(user.getUserId(), club.getClubId());
-					clubs=clubService.getAll();
-					session.setAttribute("clubs", clubs);
-					map.put("result", "0");
-					map.put("ok", "2");
+						String clubId = request.getParameter("clubId");
+						club = clubService.queryClubByClubId(Integer.parseInt(clubId));
+						club.setCheckId(1);
+						clubService.clubCheckOK(user.getUserId(), club.getClubId());
+						clubs = clubService.getAll();
+						session.setAttribute("clubs", clubs);
+						map.put("result", "0");
+						map.put("ok", "2");
 					}
-				}else if ("julebubohui".equals(operateType)) {// ���ֲ���˲��ز���
+				} else if ("julebubohui".equals(operateType)) {// ���ֲ���˲��ز���
 					if (request.getParameter("clubId") != null) {
-					String clubId = request.getParameter("clubId");
-					club = clubService.queryClubByClubId(Integer.parseInt(clubId));
-					clubService.clubCheckRefused(user.getUserId(), club.getClubId());
-					clubs=clubService.getAll();
-					session.setAttribute("clubs", clubs);
-					map.put("result", "0");
-					map.put("ok", "2");
+						String clubId = request.getParameter("clubId");
+						club = clubService.queryClubByClubId(Integer.parseInt(clubId));
+						clubService.clubCheckRefused(user.getUserId(), club.getClubId());
+						clubs = clubService.getAll();
+						session.setAttribute("clubs", clubs);
+						map.put("result", "0");
+						map.put("ok", "2");
 					}
-				}  else if ("shenhejulebuTojulebuxiangxi".equals(operateType)) {// ��˾��ֲ�������ת����˾��ֲ���ϸ��Ϣ����
+				} else if ("shenhejulebuTojulebuxiangxi".equals(operateType)) {// ��˾��ֲ�������ת����˾��ֲ���ϸ��Ϣ����
 					int clubId = Integer.parseInt(request.getParameter("searchId"));
 					club = clubService.queryClubByClubId(clubId);
 					session.setAttribute("club", club);
@@ -108,8 +110,9 @@ public class ShenHeJuLeBuServlet extends HttpServlet {
 			} else if ("2".equals(map.get("ok"))) {
 				writer.println(
 						"<script language='javascript'>window.location.href='./views/part1/shenhejulebu.jsp'</script>");
-			}else if ("5".equals(map.get("ok"))) {
-				writer.println("<script language='javascript'>window.location.href='./views/part1/shenhejulebuxiangxixinxi.jsp'</script>");
+			} else if ("5".equals(map.get("ok"))) {
+				writer.println(
+						"<script language='javascript'>window.location.href='./views/part1/shenhejulebuxiangxixinxi.jsp'</script>");
 			}
 		} else if ("-1".equals(map.get("result"))) {// ��½ʧ�ܣ��û���������
 			writer.println(
@@ -121,13 +124,14 @@ public class ShenHeJuLeBuServlet extends HttpServlet {
 			writer.println(
 					"<script language='javascript'>alert('����ʧ��');window.location.href='./views/error/insertError.jsp'</script>");
 		}
-		}
+	}
 
-	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

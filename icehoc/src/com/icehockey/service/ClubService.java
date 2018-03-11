@@ -66,7 +66,7 @@ public class ClubService {
 		}
 		if(f){
 			System.out.println("审核成功");
-			check =checkService.getCheckRecord(1,clubId);
+			check =checkService.getCheckRecord(2,clubId);
 			dao.clubCheck(clubId,0);
 		}else{
 			System.out.println("审核失败");
@@ -99,7 +99,7 @@ public class ClubService {
 		}
 		if(f){
 			System.out.println("审核成功");
-			check =checkService.getCheckRecord(1,clubId);
+			check =checkService.getCheckRecord(2,clubId);
 			dao.clubCheck(clubId,check.getId());
 		}else{
 			System.out.println("审核失败");

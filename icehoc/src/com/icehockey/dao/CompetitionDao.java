@@ -143,4 +143,37 @@ public class CompetitionDao {
 		return false;
 	}
 
+	public boolean competitionCheck(int id, int checkId) {
+		String sql ="UPDATE competition SET checkId="+checkId+" WHERE id="+id;
+		System.out.println(sql);
+		try {
+			conn = util.openConnection();
+			preparedStatement = conn.prepareStatement(sql);
+			int flag = preparedStatement.executeUpdate(sql);
+			if (flag==1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			// 关闭Statement
+			try {
+				System.out.println("statement关闭");
+				preparedStatement.close();
+			} catch (Exception e) {
+				System.out.println("statement关闭失败");
+			}
+			// 关闭Connection
+			try {
+				System.out.println("conn关闭");
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("conn关闭失败");
+			}
+		}
+		return false;
+		
+	}
+
 }

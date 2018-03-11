@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -34,20 +33,20 @@
 
 		<div data-role="content" class="all">
 			<c:choose>
-				<c:when test="${!empty schoolTeams}">
-					<c:forEach items="${schoolTeams}" var="schoolTeam" varStatus="st">
+				<c:when test="${!empty teams}">
+					<c:forEach items="${teams}" var="team" varStatus="st">
 						<div class="everyone"
-							onclick="goto1('${schoolTeam.teamId}','schoolTeam')" id="schoolTeam">
-							<div class="name">${schoolTeam.teamName}</div>
+							onclick="goto1('${team.teamId}','team')" id="team">
+							<div class="name">${team.teamName}</div>
 							<div class="content_div">
 										是否审核:
 										<c:choose>
-											<c:when test="${schoolTeam.checkId eq 0}">驳回</c:when>
-											<c:when test="${schoolTeam.checkId eq -1}">未审核</c:when>
+											<c:when test="${team.checkId eq 0}">驳回</c:when>
+											<c:when test="${team.checkId eq -1}">未审核</c:when>
 											<c:otherwise>已审核</c:otherwise>
 										</c:choose>
 									</div>
-							<div class="introduce">成立时间： ${schoolTeam.buildTime}</div>
+							<div class="introduce">成立时间： ${team.buildTime}</div>
 						</div>
 					</c:forEach>
 				</c:when>
