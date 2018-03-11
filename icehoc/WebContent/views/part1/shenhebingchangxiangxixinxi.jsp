@@ -75,7 +75,7 @@
 		</div>
 		
 		<c:if test="${rink.checkId eq -1}">
-			<button type="button" id="shenhe" value="${club.clubId}">通过审核</button>
+			<button type="button" id="shenhe" value="${rink.rinkId}">通过审核</button>
 			<button type="button" id="bohui">驳回</button>
 		</c:if>
 	</div>

@@ -6,7 +6,7 @@ $("#shenhe").click(function() {
 				operateType : "bingchangtongguo",
 				rinkId:$("#shenhe").val(),
 			};
-			// alert(JSON.stringify(data));
+			 alert(JSON.stringify(data));
 			jump(SHENHEBINGCHANGURL, data);
 	});
 $("#bohui").click(function() {
@@ -14,6 +14,6 @@ $("#bohui").click(function() {
 			operateType : "bingchangbohui",
 			rinkId:$("#shenhe").val(),
 		};
-		// alert(JSON.stringify(data));
+		 alert(JSON.stringify(data));
 		jump(SHENHEBINGCHANGURL, data);
 });
