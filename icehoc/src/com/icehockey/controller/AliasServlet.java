@@ -72,7 +72,7 @@ public class AliasServlet extends HttpServlet {
 				userName = request.getParameter("name");
 				imageUrl = request.getParameter("touxiang");
 				idNo = request.getParameter("idnum");
-				player=playerService.getPlayerByPlayerIdNo(idNo);
+				player=playerService.getPlayerByIdNo(idNo);
 				System.out.println(player);
 				if (player == null) {
 					map.put("result", "0");
@@ -94,7 +94,7 @@ public class AliasServlet extends HttpServlet {
 					f = userService.insertNewPlayer(user.getUserId(), gender, height, weight, category, handlingValue,
 							userName, imageUrl, idNo);
 					if ("创建成功".equals(f)) {
-						players = playerService.getUserFollowedPlayers(user.getUserId());
+						players = playerService.getAllFollowPlayers(user.getUserId());
 						session.setAttribute("players", players);
 						map.put("ok", "0");
 					} else {

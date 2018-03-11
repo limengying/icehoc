@@ -1,7 +1,6 @@
 package com.icehockey.entity;
 
 public class User {
-
 	private int userId;// '用户编号',
 	private String userName;// '用户姓名',
 	private String weChatId;// '微信账号',
@@ -127,10 +126,17 @@ public class User {
 		this.joinDate = joinDate;
 		this.remark = remark;
 	}
+	
+	public User(String telephone, String password) {
+		super();
+		this.telephone = telephone;
+		this.password = password;
+	}
+	
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", weChatId=" + weChatId + ", telephone="

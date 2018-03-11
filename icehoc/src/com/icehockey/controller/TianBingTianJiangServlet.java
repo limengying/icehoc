@@ -20,7 +20,6 @@ import com.icehockey.entity.Handling;
 import com.icehockey.entity.Player;
 import com.icehockey.entity.Role;
 import com.icehockey.entity.User;
-import com.icehockey.entity.UserFollowPlayer;
 import com.icehockey.service.CategoryService;
 import com.icehockey.service.ClubService;
 import com.icehockey.service.CountryCityService;
@@ -92,7 +91,7 @@ public class TianBingTianJiangServlet extends HttpServlet {
 			if (request.getParameter("operateType") != null) {
 				operateType = request.getParameter("operateType");
 				if ("zhukongToTianBingTianJiang".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出用户关注的所有球员的信息
-					players = playerService.getUserFollowedPlayers(user.getUserId());
+					players = playerService.getAllFollowPlayers(user.getUserId());
 					System.out.println(players);
 					session.setAttribute("players", players);
 					map.put("result", "0");
@@ -101,7 +100,7 @@ public class TianBingTianJiangServlet extends HttpServlet {
 				} else if ("mohusousuo".equals(operateType)) {// 如果操作类型是模糊搜索，即根据名字字符串搜索当前关注球员
 					String playerNameString = request.getParameter("playerName");
 					System.out.println("playerNameString:" + playerNameString);
-					players = playerService.getUserFollowedPlayersByNameString(user.getUserId(), playerNameString);
+					players = playerService.getFollowPlayersByStr(user.getUserId(), playerNameString);
 					System.out.println(players);
 					session.setAttribute("players", players);
 					map.put("result", "0");
@@ -109,7 +108,7 @@ public class TianBingTianJiangServlet extends HttpServlet {
 				} else if ("jingquesousuo".equals(operateType)) {// 如果操作类型是精确搜索，即根据名字字符串搜索当前关注球员
 					String playerName = request.getParameter("playerName");
 					System.out.println("playerName:" + playerName);
-					players = playerService.getUserFollowedPlayersByPlayerName(user.getUserId(), playerName);
+					players = playerService.getPlayersByPlayerName(playerName);
 		
 					System.out.println(player);
 					session.setAttribute("players", players);
@@ -143,9 +142,9 @@ public class TianBingTianJiangServlet extends HttpServlet {
 				} else if ("quxiaoguanzhu".equals(operateType)) {// 如果操作类型是精确搜索，即根据名字字符串搜索当前关注球员
 					int playerId = Integer.parseInt(request.getParameter("playerId"));
 					System.out.println("playerId:" + playerId);
-					boolean flag = playerService.cancelFollowed(user.getUserId(), playerId);
+					boolean flag = playerService.cancelFollowPlayer(user.getUserId(), playerId);
 					if (flag) {
-						players = playerService.getUserFollowedPlayers(user.getUserId());
+						players = playerService.getAllFollowPlayers(user.getUserId());
 						System.out.println(flag);
 						session.setAttribute("flag", flag);
 						session.setAttribute("players", players);
@@ -157,13 +156,11 @@ public class TianBingTianJiangServlet extends HttpServlet {
 				} else if ("guanzhuqiuyuan".equals(operateType)) {// 如果操作类型是精确搜索，即根据名字字符串搜索当前关注球员
 					int playerId = Integer.parseInt(request.getParameter("playerId"));
 					System.out.println("playerId:" + playerId);
-					UserFollowPlayer userFollowPlayer = playerService.userFollowPlayer(user.getUserId(), playerId);
-					System.out.println(userFollowPlayer);
+					playerService.addFollowPlayer(user.getUserId(),playerId);
+					System.out.println(player);
 					//重新获取已关注球员
-					players = playerService.getUserFollowedPlayers(user.getUserId());
+					players = playerService.getAllFollowPlayers(user.getUserId());
 					System.out.println(players);
-					session.setAttribute("userFollowPlayer", userFollowPlayer);
-					
 					session.setAttribute("players", players);
 					map.put("result", "0");
 					map.put("ok", "6");
@@ -225,10 +222,18 @@ public class TianBingTianJiangServlet extends HttpServlet {
 						System.out.println("birthday:"+birthday);
 					}
 					//这里没有处理球员所在俱乐部
-					boolean f = playerService.updateInfo(playerId, weight, height, position, categoryId,
-							handlingId, birthday, image);
+					Player player2=new Player();
+					player2.setPlayerId(playerId);
+					player2.setCategoryId(categoryId);
+					player2.setHandlingId(handlingId);
+					player2.setPosition(position);
+					player2.setWeight(weight);
+					player2.setHeight(height);
+					player2.setBirthday(birthday);
+					player2.setImage(image);
+					boolean f = playerService.updatePlayerInfo(player2);
 					if (f) {
-						players = playerService.getUserFollowedPlayers(user.getUserId());
+						players = playerService.getAllFollowPlayers(user.getUserId());
 						session.setAttribute("players", players);
 						map.put("result", "0");
 						map.put("ok", "9");

@@ -79,7 +79,8 @@ public class DaoHangLanServlet extends HttpServlet {
 							"<script>alert('待开发');window.location.href='./views/part1/zhukongyemian.jsp'</script>");
 
 				} else if ("wode".equals(opt)) {
-					List<Player> players=playerService.getUserFollowedPlayers(user.getUserId());
+					System.out.println(user.getUserId());
+					List<Player> players=playerService.getAllFollowPlayers(user.getUserId());
 					session.setAttribute("num", players.size());
 					map.put("ok", "wode");
 					System.out.println(map.get("ok"));

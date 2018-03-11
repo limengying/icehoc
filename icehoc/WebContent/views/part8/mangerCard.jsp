@@ -47,7 +47,7 @@
 			<div class="IDCard">
 				<div>身份证正面:</div>
 				<div class="img">
-					<img src="${idInfo.frontPhoto}" />
+					<img src="../img/part8/zhengmian.jpg"/>
 				</div>
 
 			</div>
@@ -55,7 +55,7 @@
 			<div class="IDCard">
 				<div>身份证反面:</div>
 				<div class="img">
-					<img src="${idInfo.reversePhoto}" />
+					<img src="../img/part8/fanmian.jpg"/>
 				</div>
 
 			</div>

@@ -1,13 +1,18 @@
 package com.icehockey.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.icehockey.dao.RinkDao;
+import com.icehockey.entity.Check;
 import com.icehockey.entity.Rink;
 
 public class RinkService {
 	RinkDao rinkDao = new RinkDao();
+	CheckService checkService=new CheckService();
 
+	Check check=null;
 	Rink rink = null;
 	List<Rink> rinks = null;
 
@@ -26,6 +31,38 @@ public class RinkService {
 			return null;
 		}
 
+	}
+	public boolean rinkCheckOK(int userId, int rinkId) {
+		check =checkService.getCheckRecord(1,rink.getRinkId());
+		Check checkTemp =new Check();
+		String reason=null;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+		Date currentDateTime = new Date();
+		System.out.println(df.format(currentDateTime));// new Date()为获取当前系统时间
+		String followdateString = df.format(currentDateTime);
+		checkTemp.setFlag(1);
+		checkTemp.setFlagNo(rinkId);
+		checkTemp.setCheckReslut(true); 
+		checkTemp.setCheckDate(followdateString);
+		checkTemp.setUserId(userId);
+		boolean f=false;
+		if(check==null){
+			reason="通过";
+			checkTemp.setReason(reason);
+			 f=checkService.addCheckRecord(checkTemp);
+		}else{
+			reason=check.getReason()+"通过";
+			checkTemp.setReason(reason);
+			f=checkService.updateCheckRecord(check.getId(),checkTemp);
+		}
+		if(f){
+			System.out.println("审核成功");
+			check = checkService.getCheckRecord(1, rink.getRinkId());
+			rinkDao.rinkCheck(rinkId,check.getId());
+		}else{
+			System.out.println("审核失败");
+		}
+		return f;
 	}
 
 	/**

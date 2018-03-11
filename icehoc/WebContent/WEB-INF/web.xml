@@ -9,6 +9,36 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+    <servlet>
+    <description></description>
+    <display-name>ShenHeXiaoDuiServlet</display-name>
+    <servlet-name>ShenHeXiaoDuiServlet</servlet-name>
+    <servlet-class>com.icehockey.controller.ShenHeXiaoDuiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShenHeXiaoDuiServlet</servlet-name>
+    <url-pattern>/ShenHeXiaoDuiServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShenHeJuLeBuServlet</display-name>
+    <servlet-name>ShenHeJuLeBuServlet</servlet-name>
+    <servlet-class>com.icehockey.controller.ShenHeJuLeBuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShenHeJuLeBuServlet</servlet-name>
+    <url-pattern>/ShenHeJuLeBuServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShenHeBingChangServlet</display-name>
+    <servlet-name>ShenHeBingChangServlet</servlet-name>
+    <servlet-class>com.icehockey.controller.ShenHeBingChangServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShenHeBingChangServlet</servlet-name>
+    <url-pattern>/ShenHeBingChangServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>BingChangInfoServlet</display-name>

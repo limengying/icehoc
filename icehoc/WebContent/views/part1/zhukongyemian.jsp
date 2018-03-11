@@ -26,9 +26,12 @@
 					<div class="b"><span>冰天<br/>雪地</span></div>
 					<div class="c"><span>添兵<br/>添将</span></div>
 					<div class="d"><span>兵临<br/>城下</span></a></div>
-					<div class="e"><span>冰步<br/>雪刃</span></a></div>
+					<div class="e"><span>冰步<br/>雪刃</span></a></div>	
+					<div class="shenhe"><span>审核页面</span></div>
 				</div>
 			</div>
+			
+			
 			<div class="button">
 							<div class="shouye" onclick="shouyeClick()">
 								<span class="ch">首页</span>
@@ -42,7 +45,7 @@
 							<div class="wode" onclick="wodeClick()">
 								<span class="ch">我的</span>
 							</div>
-				  </div>	
+			</div>	
 		</div>
 		 <script src="../../js/common/common.js"></script>
 		 <script src="../../js/urlApi/api.js"></script>

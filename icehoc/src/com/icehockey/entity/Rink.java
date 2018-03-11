@@ -25,6 +25,25 @@ public class Rink {
 	private int environmentalIndex; // 环境指数
 	private String changeDate; // 最后修改时间
 	private String remark; // 备注
+	private String businessLicense;
+	private String idCardCopyFile;
+	private int checkId;
+
+	public String getBusinessLicense() {
+		return businessLicense;
+	}
+
+	public void setBusinessLicense(String businessLicense) {
+		this.businessLicense = businessLicense;
+	}
+
+	public String getIdCardCopyFile() {
+		return idCardCopyFile;
+	}
+
+	public void setIdCardCopyFile(String idCardCopyFile) {
+		this.idCardCopyFile = idCardCopyFile;
+	}
 
 	public int getRinkId() {
 		return rinkId;
@@ -218,16 +237,19 @@ public class Rink {
 		this.remark = remark;
 	}
 
-	public Rink() {
-		super();
-		// TODO Auto-generated constructor stub
+	public int getCheckId() {
+		return checkId;
+	}
+
+	public void setCheckId(int checkId) {
+		this.checkId = checkId;
 	}
 
 	public Rink(int rinkId, String rinkName, String rinkLogo, int countryId, int cityId, String telephone,
 			boolean indoor, boolean hasLocker, boolean hasCarpark, String trainingDegree, int scale,
 			boolean hasLandTrainingRoom, double area, double iceArea, String completionDate, String beginUseDate,
 			String openTime, boolean allowedSlip, String email, String iceType, String address, int environmentalIndex,
-			String changeDate, String remark) {
+			String changeDate, String remark, String businessLicense, String idCardCopyFile, int checkId) {
 		super();
 		this.rinkId = rinkId;
 		this.rinkName = rinkName;
@@ -253,6 +275,24 @@ public class Rink {
 		this.environmentalIndex = environmentalIndex;
 		this.changeDate = changeDate;
 		this.remark = remark;
+		this.businessLicense = businessLicense;
+		this.idCardCopyFile = idCardCopyFile;
+		this.checkId = checkId;
+	}
+
+	public Rink(int rinkId) {
+		super();
+		this.rinkId = rinkId;
+	}
+
+	public Rink(String rinkName) {
+		super();
+		this.rinkName = rinkName;
+	}
+
+	public Rink() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -264,6 +304,7 @@ public class Rink {
 				+ ", completionDate=" + completionDate + ", beginUseDate=" + beginUseDate + ", openTime=" + openTime
 				+ ", allowedSlip=" + allowedSlip + ", email=" + email + ", iceType=" + iceType + ", address=" + address
 				+ ", environmentalIndex=" + environmentalIndex + ", changeDate=" + changeDate + ", remark=" + remark
+				+ ", businessLicense=" + businessLicense + ", idCardCopyFile=" + idCardCopyFile + ", checkId=" + checkId
 				+ "]";
 	}
 

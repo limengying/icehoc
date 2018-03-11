@@ -61,6 +61,13 @@ public class LoginLog {
 		this.loginOffTime = loginOffTime;
 		this.remark = remark;
 	}
+	
+	public LoginLog(int userId, String loginTime, String remark) {
+		super();
+		this.userId = userId;
+		this.loginTime = loginTime;
+		this.remark = remark;
+	}
 	@Override
 	public String toString() {
 		return "LoginLog [id=" + id + ", userId=" + userId + ", ipAddress=" + ipAddress + ", signed=" + signed

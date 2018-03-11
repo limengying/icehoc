@@ -81,9 +81,12 @@ public class RinkDao {
 					changeDate = df.format(timestamp.getTime());
 				}
 				String remark = rs.getString("remark"); // 备注
+				String businessLicense = rs.getString("businessLicense"); // 备注
+				String idCardCopyFile = rs.getString("idCardCopyFile"); // 备注
+				int checkId=rs.getInt("checkId");//审核标志
 				rink = new Rink(rinkId, rinkName, rinkLogo, countryId, cityId, telephone, indoor, hasLocker, hasCarpark,
 						trainingDegree, scale, hasLandTrainingRoom, area, iceArea, completionDate, beginUseDate,
-						openTime, allowedSlip, email, iceType, address, environmentalIndex, changeDate, remark);
+						openTime, allowedSlip, email, iceType, address, environmentalIndex, changeDate, remark,businessLicense,idCardCopyFile,checkId);
 				System.out.println(rink);
 				rinks.add(rink);
 			}
@@ -169,9 +172,12 @@ public class RinkDao {
 					changeDate = df.format(timestamp.getTime());
 				}
 				String remark = rs.getString("remark"); // 备注
+				String businessLicense = rs.getString("businessLicense"); // 备注
+				String idCardCopyFile = rs.getString("idCardCopyFile"); // 备注
+				int checkId=rs.getInt("checkId");//审核标志
 				rink = new Rink(rinkId, rinkName, rinkLogo, countryId, cityId, telephone, indoor, hasLocker, hasCarpark,
 						trainingDegree, scale, hasLandTrainingRoom, area, iceArea, completionDate, beginUseDate,
-						openTime, allowedSlip, email, iceType, address, environmentalIndex, changeDate, remark);
+						openTime, allowedSlip, email, iceType, address, environmentalIndex, changeDate, remark,businessLicense,idCardCopyFile,checkId);
 				System.out.println(rink);
 				rinks.add(rink);
 			}
@@ -257,9 +263,12 @@ public class RinkDao {
 					changeDate = df.format(timestamp.getTime());
 				}
 				String remark = rs.getString("remark"); // 备注
+				String businessLicense = rs.getString("businessLicense"); // 备注
+				String idCardCopyFile = rs.getString("idCardCopyFile"); // 备注
+				int checkId=rs.getInt("checkId");//审核标志
 				rink = new Rink(rinkId, rinkName, rinkLogo, countryId, cityId, telephone, indoor, hasLocker, hasCarpark,
 						trainingDegree, scale, hasLandTrainingRoom, area, iceArea, completionDate, beginUseDate,
-						openTime, allowedSlip, email, iceType, address, environmentalIndex, changeDate, remark);
+						openTime, allowedSlip, email, iceType, address, environmentalIndex, changeDate, remark,businessLicense,idCardCopyFile,checkId);
 				System.out.println(rink);
 				return rink;
 			} else {
@@ -287,7 +296,39 @@ public class RinkDao {
 		}
 		return null;
 	}
-
+	public boolean rinkCheck(int userId, int rinkId) {//重置审核标志
+		String sql ="UPDATE rink SET checkId=? WHERE rinkId=?;";
+		try {
+			conn = util.openConnection();
+			preparedStatement = conn.prepareStatement(sql);
+//			preparedStatement.setInt(1, rink.getCheckId());
+			preparedStatement.setInt(1, rinkId);
+			int flag = preparedStatement.executeUpdate(sql);
+			if (flag==1) {
+				System.out.println(rink.getCheckId());
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			// 关闭Statement
+			try {
+				System.out.println("statement关闭");
+				preparedStatement.close();
+			} catch (Exception e) {
+				System.out.println("statement关闭失败");
+			}
+			// 关闭Connection
+			try {
+				System.out.println("conn关闭");
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("conn关闭失败");
+			}
+		}
+		return false;
+	}
 	public boolean addRink(String rinkName, String address, String telephone, boolean indoor, boolean hasLocker,
 			boolean hasCarparks, String trainingDegree, int scale, boolean hasLandTrainingRoom, int area, int iceArea,
 			String completionDate, String beginUseDate, String openTime, boolean allowedSlip, String iceType) {

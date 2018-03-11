@@ -36,5 +36,8 @@ $(document).ready(function() {
 		jump(BINGBUXUERENURL, data);
 		// window.location.href = "../part6/bingbuxuerenzhuyemian.jsp";
 	});
+	$(".shenhe").click(function(){
+		window.location.href = "shenhe.jsp";
+	});
 
 });

@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.icehockey.entity.DuiKang;
+import com.icehockey.entity.Match;
 import com.icehockey.entity.Player;
 import com.icehockey.entity.User;
-import com.icehockey.service.DuiKangService;
+import com.icehockey.service.MatchService;
 import com.icehockey.service.PlayerService;
 import com.icehockey.service.StatisticService;
 
@@ -50,14 +50,15 @@ public class BingBuXueRenServlet extends HttpServlet {
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("-----------------冰步雪刃后台程序----------");
 
-		DuiKangService duiKangService = new DuiKangService();
+		MatchService matchService = new MatchService();
 		PlayerService playerService = new PlayerService();
 		StatisticService statisticService = new StatisticService();
 
 		User user = null;
 		Player player = null;
 		List<Player> players = null;
-		List<DuiKang> duiKangs = null;
+		List<Match> matchs = null;
+		
 		System.out.println("跳转后的sessionId :" + session.getId());
 		String operateType = null;
 		// session
@@ -68,7 +69,7 @@ public class BingBuXueRenServlet extends HttpServlet {
 			if (request.getParameter("operateType") != null) {
 				operateType = request.getParameter("operateType");
 				if ("zhukongToBingBuXueRen".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
-					players = playerService.getUserFollowedPlayers(user.getUserId());
+					players = playerService.getAllFollowPlayers(user.getUserId());
 					System.out.println(players);
 					session.setAttribute("players", players);
 					map.put("result", "0");
@@ -86,11 +87,11 @@ public class BingBuXueRenServlet extends HttpServlet {
 					}
 					session.setAttribute("player", player);
 					String competitionType = request.getParameter("competitionType");
-					duiKangs = duiKangService.getDuiKangs(user.getUserId());
+					matchs = matchService.getAllUserFollowCompetition(user.getUserId());
 					session.setAttribute("playerId", playerId);
-					session.setAttribute("duiKangs", duiKangs);
+					session.setAttribute("matchs", matchs);
 					session.setAttribute("competitionType", competitionType);
-					map.put("duiKangs", duiKangs);
+					map.put("matchs", matchs);
 					map.put("result", "0");
 					map.put("ok", "2");
 				} else if ("shujvcaijixuanzesaishi".equals(operateType)) {// 如果操作类型是数据采集-赛事选择

@@ -53,9 +53,9 @@
 		<!--导航栏下面内容-->
 		<div data-role="content" class="all">
 			<c:choose>
-				<c:when test="${!empty saiShiInfos}">
-					<c:forEach items="${saiShiInfos}" var="saiShi" varStatus="st">
-						<div class="everyone" onclick="goto1('${saiShi.id}')">
+				<c:when test="${!empty matchs}">
+					<c:forEach items="${matchs}" var="saiShi" varStatus="st">
+						<div class="everyone" onclick="goto1('${saiShi.competitionId}')">
 							<div class="day">比赛时间：${saiShi.pkDate}</div>
 							<!--年月日时间 -->
 

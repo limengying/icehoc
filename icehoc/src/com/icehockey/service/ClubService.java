@@ -28,4 +28,7 @@ public class ClubService {
 		
 		return dao.addClub(clubName, buildTime, remark);
 	}
+	public void resetcheckId(Club club) {
+		dao.resetclubcheckId(club);
+	}
 }

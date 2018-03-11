@@ -14,12 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import com.icehockey.entity.City;
 import com.icehockey.entity.Country;
-import com.icehockey.entity.IdInfo;
 import com.icehockey.entity.LoginLog;
 import com.icehockey.entity.Player;
 import com.icehockey.entity.User;
 import com.icehockey.service.CountryCityService;
-import com.icehockey.service.IdInfoService;
 import com.icehockey.service.LoginLogService;
 import com.icehockey.service.PlayerService;
 import com.icehockey.service.UserService;
@@ -60,13 +58,11 @@ public class WoDeZhongXinServlet extends HttpServlet {
 		PlayerService playerService = new PlayerService();
 		CountryCityService countryCityService = new CountryCityService();
 		UserService userService = new UserService();
-		IdInfoService idInfoService = new IdInfoService();
 		LoginLogService loginLogService = new LoginLogService();
 		int loginLogId = -1;
 		Country country = null;
 		City city = null;
 		User user = null;
-		IdInfo idInfo = null;
 		List<Player> players = null;
 		System.out.println("跳转后的sessionId :" + session.getId());
 		String operateType = null;
@@ -83,13 +79,11 @@ public class WoDeZhongXinServlet extends HttpServlet {
 
 					country = countryCityService.queryCountry(user.getCountryId());
 					city = countryCityService.queryCity(user.getCityId());
-					idInfo = idInfoService.getRecordByIdInfo(user.getIdInfoId());
 					System.out.println(country);
 					System.out.println(city);
-					System.out.println(idInfo);
 					session.setAttribute("country", country);
 					session.setAttribute("city", city);
-					session.setAttribute("idInfo", idInfo);
+					session.setAttribute("idInfo", user.getIdInfoId());
 					map.put("result", "0");
 					map.put("ok", "1");
 				} else if ("xiugaixinxi".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
@@ -116,7 +110,7 @@ public class WoDeZhongXinServlet extends HttpServlet {
 						System.out.println("更新失败");
 					}
 				} else if ("zhongxinToPlayer".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
-					players = playerService.getUserFollowedPlayers(user.getUserId());
+					players = playerService.getAllFollowPlayers(user.getUserId());
 					if (players != null) {
 						session.setAttribute("players", players);
 						map.put("result", "0");

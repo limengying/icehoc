@@ -18,3 +18,6 @@ const HANDLINGURL=IPCONFIG+'ChiganfangshiServlet';//持杆方式url
 const ALIASURL=IPCONFIG+'AliasServlet';//头像选择url
 const BINGTIANXUEDIURL=IPCONFIG+'BingTianXueDiServlet';//冰天雪地选择url
 const WODEZHONGXINURL=IPCONFIG+'WoDeZhongXinServlet';//冰天雪地选择url
+const SHENHEBINGCHANGURL=IPCONFIG+'ShenHeBingChangServlet';//审核冰场url
+const SHENHEJULEBUURL=IPCONFIG+'ShenHeJuLeBuServlet';//审核俱乐部url
+const SHENHEXIAODUIURL=IPCONFIG+'ShenHeXiaoDuiServlet';//审核校队url

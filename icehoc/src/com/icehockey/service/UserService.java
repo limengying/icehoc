@@ -7,7 +7,6 @@ import java.util.List;
 import com.icehockey.dao.UserDao;
 import com.icehockey.entity.Category;
 import com.icehockey.entity.Handling;
-import com.icehockey.entity.IdInfo;
 import com.icehockey.entity.LoginLog;
 import com.icehockey.entity.Player;
 import com.icehockey.entity.User;
@@ -18,14 +17,12 @@ public class UserService {
 	List<User> users = null;// 声明一个User集合
 	User user = null;// 声明一个User对象
 	Player player = null;
-	IdInfo idInfo = null;
-	LoginLog loginLog=null;
+	LoginLog loginLog = null;
 
 	CategoryService categoryService = new CategoryService();
 	HandlingService handlingService = new HandlingService();
 	PlayerService playerService = new PlayerService();
-	IdInfoService idInfoService = new IdInfoService();
-	LoginLogService loginLogService=new LoginLogService();
+	LoginLogService loginLogService = new LoginLogService();
 
 	/**
 	 * 
@@ -49,20 +46,21 @@ public class UserService {
 		return user;
 	}
 
-	public int addLoginRecord(int loginUserId,String s){
+	public int addLoginRecord(int loginUserId, String s) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 		Date currentDateTime = new Date();
 		System.out.println(df.format(currentDateTime));// new Date()为获取当前系统时间
 		String dateString = df.format(currentDateTime);
-		boolean f=loginLogService.addLoginLog(loginUserId,dateString,s);
-		if(f){
-			loginLog=loginLogService.getLogNewAdd(loginUserId,dateString);
+		boolean f = loginLogService.addLoginLog(loginUserId, dateString, s);
+		if (f) {
+			loginLog = loginLogService.getLogNewAdd(loginUserId, dateString);
 		}
-		if(loginLog!=null){
+		if (loginLog != null) {
 			return loginLog.getId();
 		}
 		return -1;
 	}
+
 	/**
 	 * 
 	 * // 通过手机号和密码注册
@@ -73,7 +71,7 @@ public class UserService {
 			user = dao.addUser(telephone, password);
 			if (user == null) {
 				System.out.println("插入失败");
-				
+
 			} else {
 				user.setRemark("注册成功");
 				System.out.println("注册成功");
@@ -92,37 +90,45 @@ public class UserService {
 	public String insertNewPlayer(int userId, boolean gender, double height, double weight, String categoryValue,
 			String handlingValue, String userName, String imageUrl, String idNo) {
 		// 查找身份证号是否已经存在
-		String state="";
-		idInfo = idInfoService.getRecordByIdInfo(idNo);
-		if (idInfo == null) {
+		String state = "";
+		if (idNo == null) {
 			Category category = categoryService.queryCategory(categoryValue);// 查询当前类别名称是否在数据库中有对应的项
 			if (category == null) {
-				state=categoryValue + "类别未找到";
+				state = categoryValue + "类别未找到";
 				System.out.println(categoryValue + "类别未找到");
 				return state;
 			}
 			Handling handling = handlingService.queryHandling(handlingValue);// 根据持杆方式名称查询持杆方式对象
 			if (handling == null) {
-				state=handlingValue + "持杆方式未找到";
+				state = handlingValue + "持杆方式未找到";
 				System.out.println(handlingValue + "持杆方式未找到");
 				return state;
 			}
-			player = playerService.insertNewPlayer(userId, gender, height, weight, category.getCategoryId(),
-					handling.getHandlingId(), userName, imageUrl, idNo);// 执行插入动作，并返回是否插入成功
-			if (player != null) {
-				state="创建成功";
+			Player player2 = new Player();
+			player2.setSex(gender);
+			player2.setHeight(height);
+			player2.setWeight(weight);
+			player2.setCategoryId(category.getCategoryId());
+			player2.setHandlingId(handling.getHandlingId());
+			player2.setName(userName);
+			player2.setImage(imageUrl);
+			player2.setIdInfoId(idNo);
+			boolean f = playerService.addPlayer(userId, player2);// 执行插入动作，并返回是否插入成功
+			if (f) {
+				state = "创建成功";
 				System.out.println("创建成功");
 			} else {
-				state="新建球员失败";
+				state = "新建球员失败";
 				System.out.println("新建球员失败");
 			}
 			return state;
 		} else {
-			state="身份证号码已存在";
+			state = "身份证号码已存在";
 			System.out.println("身份证号码已存在");
 			return state;
 		}
 	}
+
 	/**
 	 * 通过userId等参数新建一个player 插入新用户，首先判断前端传入的角色名称，持杆方式名称是否存在，如果都存在，则插入，返回是否插入成功
 	 */
@@ -130,14 +136,15 @@ public class UserService {
 		user = dao.getUserByUserId(userId);
 		return user;
 	}
+
 	/**
 	 * 通过userId等参数新建一个player 插入新用户，首先判断前端传入的角色名称，持杆方式名称是否存在，如果都存在，则插入，返回是否插入成功
 	 */
 	public boolean updateUser(int userId, String name, String birthday, String address) {
 		return dao.updateUser(userId, name, birthday, address);
-		
+
 	}
-	
+
 	/**
 	 * 签到
 	 */

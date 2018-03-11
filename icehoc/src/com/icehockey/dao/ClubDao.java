@@ -51,11 +51,12 @@ public class ClubDao {
 				String managerContent = rs.getString("managerContent"); // 经营内容
 				String email = rs.getString("email"); // 电子邮件
 				String construction = rs.getString("construction"); // 球队建设
-				String province = rs.getString("province"); // 省份
+				int provinceId = rs.getInt("provinceId"); // 省份
 				String remark = rs.getString("remark"); // 备注
-
-				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, cityId,
-						managerContent, email, construction, province, remark);
+				String businessLicense = rs.getString("province"); // 省份
+				String idCardCopyFile = rs.getString("remark"); // 备注
+				int checkId = rs.getInt("checkId");//审核标志
+				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, provinceId, cityId, managerContent, email, construction, remark, businessLicense, idCardCopyFile, checkId);
 				System.out.println(club);
 
 				return club;
@@ -92,7 +93,7 @@ public class ClubDao {
 			preparedStatement = conn.prepareStatement(sql);
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				int clubId = rs.getInt("clubId"); // 城市编号
+				int clubId = rs.getInt("clubId"); // 俱乐部编号
 				String clubName = rs.getString("clubName"); // 俱乐部名称
 				String clubLogo = rs.getString("clubLogo"); // 俱乐部LOGO
 				String organization = rs.getString("organization"); // 俱乐部所属机构
@@ -108,11 +109,12 @@ public class ClubDao {
 				String managerContent = rs.getString("managerContent"); // 经营内容
 				String email = rs.getString("email"); // 电子邮件
 				String construction = rs.getString("construction"); // 球队建设
-				String province = rs.getString("provinceId"); // 省份
+				int provinceId = rs.getInt("provinceId"); // 省份
 				String remark = rs.getString("remark"); // 备注
-
-				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, cityId,
-						managerContent, email, construction, province, remark);
+				String businessLicense = rs.getString("businessLicense"); // 省份
+				String idCardCopyFile = rs.getString("idCardCopyFile"); // 备注
+				int checkId = rs.getInt("checkId");//审核标志
+				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, provinceId, cityId, managerContent, email, construction, remark, businessLicense, idCardCopyFile, checkId);
 				System.out.println(club);
 				clubs.add(club);
 
@@ -149,7 +151,7 @@ public class ClubDao {
 			preparedStatement = conn.prepareStatement(sql);
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				int clubId = rs.getInt("clubId"); // 城市编号
+				int clubId = rs.getInt("clubId"); // 俱乐部编号
 				String clubName = rs.getString("clubName"); // 俱乐部名称
 				String clubLogo = rs.getString("clubLogo"); // 俱乐部LOGO
 				String organization = rs.getString("organization"); // 俱乐部所属机构
@@ -165,11 +167,12 @@ public class ClubDao {
 				String managerContent = rs.getString("managerContent"); // 经营内容
 				String email = rs.getString("email"); // 电子邮件
 				String construction = rs.getString("construction"); // 球队建设
-				String province = rs.getString("provinceId"); // 省份
+				int provinceId = rs.getInt("provinceId"); // 省份
 				String remark = rs.getString("remark"); // 备注
-
-				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, cityId,
-						managerContent, email, construction, province, remark);
+				String businessLicense = rs.getString("province"); // 省份
+				String idCardCopyFile = rs.getString("remark"); // 备注
+				int checkId = rs.getInt("checkId");//审核标志
+				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, provinceId, cityId, managerContent, email, construction, remark, businessLicense, idCardCopyFile, checkId);
 				System.out.println(club);
 				clubs.add(club);
 
@@ -206,7 +209,7 @@ public class ClubDao {
 			preparedStatement.setInt(1, clubId);
 			rs = preparedStatement.executeQuery();
 			if (rs.next()) {
-				clubId = rs.getInt("clubId"); // 城市编号
+				 clubId = rs.getInt("clubId"); // 俱乐部编号
 				String clubName = rs.getString("clubName"); // 俱乐部名称
 				String clubLogo = rs.getString("clubLogo"); // 俱乐部LOGO
 				String organization = rs.getString("organization"); // 俱乐部所属机构
@@ -222,11 +225,12 @@ public class ClubDao {
 				String managerContent = rs.getString("managerContent"); // 经营内容
 				String email = rs.getString("email"); // 电子邮件
 				String construction = rs.getString("construction"); // 球队建设
-				String province = rs.getString("provinceId"); // 省份
+				int provinceId = rs.getInt("provinceId"); // 省份
 				String remark = rs.getString("remark"); // 备注
-
-				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, cityId,
-						managerContent, email, construction, province, remark);
+				String businessLicense = rs.getString("province"); // 省份
+				String idCardCopyFile = rs.getString("remark"); // 备注
+				int checkId = rs.getInt("checkId");//审核标志
+				club = new Club(clubId, clubName, clubLogo, organization, address, buildTime, countryId, provinceId, cityId, managerContent, email, construction, remark, businessLicense, idCardCopyFile, checkId);
 				System.out.println(club);
 				return club;
 
@@ -254,6 +258,37 @@ public class ClubDao {
 		return null;
 	}
 
+	public void resetclubcheckId(Club club) {//重置审核标志
+		String sql ="UPDATE club SET checkId=? WHERE clubId=?;";
+		try {
+			conn = util.openConnection();
+			preparedStatement = conn.prepareStatement(sql);
+//			preparedStatement.setInt(1, club.getCheckId());
+			preparedStatement.setInt(1, club.getCheckId());
+			int flag = preparedStatement.executeUpdate(sql);
+			if (flag>0) {
+				System.out.println(club.getCheckId());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			// 关闭Statement
+			try {
+				System.out.println("statement关闭");
+				preparedStatement.close();
+			} catch (Exception e) {
+				System.out.println("statement关闭失败");
+			}
+			// 关闭Connection
+			try {
+				System.out.println("conn关闭");
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("conn关闭失败");
+			}
+		}
+	}
 	public boolean addClub(String clubName, String buildTime, String construction) {
 		String sql = "INSERT INTO club ( clubName, buildTime, construction ) " + "VALUES ( '" + clubName + "', '"
 				+ buildTime + "', '" + construction + "' )";

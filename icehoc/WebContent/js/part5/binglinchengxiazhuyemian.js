@@ -16,6 +16,7 @@ $(document).ready(function() {
 		var data = {
 			operateType : "BingLinChengXia"
 		};
+		//alert(JSON.stringify(data));
 		jump(BINGLINCHENGXIAURL, data);
 		// window.location.href = "binglinchengxiazhuyemian.jsp";
 	});

@@ -8,8 +8,7 @@
 	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 <title>手机号登录页面</title>
 <link rel="stylesheet" href="../../css/part1/qitadenglufangshi.css" />
-<link rel="stylesheet"
-	href="../../css/jqueryMobile/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="../../css/jqueryMobile/jquery.mobile-1.4.5.min.css" />
 <link rel="stylesheet" href="../../css/part1/allpagesame.css" />
 <script src="../../js/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../../js/jqueryMobile/jquery.mobile-1.4.5.min.js"></script>

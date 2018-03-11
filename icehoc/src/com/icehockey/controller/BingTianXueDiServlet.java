@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.icehockey.entity.Club;
+import com.icehockey.entity.Match;
 import com.icehockey.entity.Rink;
-import com.icehockey.entity.SaiShiInfo;
-import com.icehockey.entity.SchoolTeam;
+import com.icehockey.entity.Team;
 import com.icehockey.entity.User;
 import com.icehockey.service.ClubService;
 import com.icehockey.service.CompetitionService;
+import com.icehockey.service.MatchService;
 import com.icehockey.service.RinkService;
-import com.icehockey.service.SaiShiInfoService;
-import com.icehockey.service.SchoolTeamService;
+import com.icehockey.service.TeamService;
 
 /**
  * Servlet implementation class BingTianXueDiServlet
@@ -55,18 +55,19 @@ public class BingTianXueDiServlet extends HttpServlet {
 
 		ClubService clubService = new ClubService();
 		RinkService rinkService=new RinkService();
-		SchoolTeamService schoolTeamService = new SchoolTeamService();
+		TeamService teamService=new TeamService();
 		CompetitionService competitionService=new CompetitionService();
-		SaiShiInfoService saiShiInfoService=new SaiShiInfoService();
+		MatchService matchService=new MatchService();
+		
 		User user = null;
 		System.out.println(user);
 		Club club = null;
-		SchoolTeam schoolTeam = null;
-		SaiShiInfo saiShiInfo = null;
+		Team team = null;
+		Match match = null;
 		List<Club> clubs = null;
 		List<Rink> rinks = null;
-		List<SchoolTeam> schoolTeams = null;
-		List<SaiShiInfo> saiShiInfos=null;
+		List<Team> teams = null;
+		List<Match> matchs=null;
 		System.out.println("跳转后的sessionId :" + session.getId());
 		String operateType = null;
 		// session
@@ -92,14 +93,14 @@ public class BingTianXueDiServlet extends HttpServlet {
 
 				} else if ("schoolTeamSearch".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
 					String nameString = request.getParameter("searchString");
-					schoolTeams = schoolTeamService.querySchoolTeamsByNameString(nameString);
-					session.setAttribute("schoolTeams", schoolTeams);
+					teams = teamService.queryTeamsByNameString(nameString);
+					session.setAttribute("teams", teams);
 					map.put("result", "0");
 					map.put("ok", "3");
 				} else if ("competitionSearch".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
 					String nameString = request.getParameter("searchString");
-					saiShiInfos = saiShiInfoService.querySaiShiInfosByNameString(nameString);
-					session.setAttribute("saiShiInfos", saiShiInfos);
+					matchs = matchService.getMatchsByStr(nameString);
+					session.setAttribute("matchs", matchs);
 					map.put("result", "0");
 					map.put("ok", "4");
 				} else if ("clubToXiangxi".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
@@ -109,25 +110,25 @@ public class BingTianXueDiServlet extends HttpServlet {
 					map.put("result", "0");
 					map.put("ok", "5");
 				} else if ("schoolTeamAll".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
-					schoolTeams = schoolTeamService.querySchoolTeams();
-					session.setAttribute("schoolTeams", schoolTeams);
+					teams = teamService.queryTeams();
+					session.setAttribute("teams", teams);
 					map.put("result", "0");
 					map.put("ok", "6");
 				} else if ("schoolTeamToXiangxi".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
-					int schoolTeamId = Integer.parseInt(request.getParameter("searchId"));
-					schoolTeam = schoolTeamService.querySchoolTeamBySchoolTeamId(schoolTeamId);
-					session.setAttribute("schoolTeam", schoolTeam);
+					int teamId = Integer.parseInt(request.getParameter("searchId"));
+					team = teamService.queryTeamByTeamId(teamId);
+					session.setAttribute("team", team);
 					map.put("result", "0");
 					map.put("ok", "7");
 				} else if ("competitionAll".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
-					saiShiInfos = saiShiInfoService.getSaiShiInfosGuanFang();
-					session.setAttribute("saiShiInfos", saiShiInfos);
+					matchs = matchService.getAllOfficialCompetitions();
+					session.setAttribute("matchs", matchs);
 					map.put("result", "0");
 					map.put("ok", "8");
 				} else if ("competitionToXiangxi".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
 					int id = Integer.parseInt(request.getParameter("searchId"));
-					saiShiInfo = saiShiInfoService.getSaiShiInfoById(id);
-					session.setAttribute("saiShiInfo", saiShiInfo);
+					match = matchService.getMatchByCompetitionId(id);
+					session.setAttribute("match", match);
 					map.put("result", "0");
 					map.put("ok", "9");
 				} else if ("tianjiaClub".equals(operateType)) {// 如果操作类型是主控页面到浇冰必拜主页面，则取出场地表中的所有场地信息
@@ -149,10 +150,10 @@ public class BingTianXueDiServlet extends HttpServlet {
 					String teamName = request.getParameter("SchoolTeamName");
 					String buildTime = request.getParameter("buildTime");
 					String construction = request.getParameter("schoolTeamConstruction");
-					boolean f = schoolTeamService.addschoolTeam(teamName, buildTime, construction);
+					boolean f = teamService.addTeam(teamName, buildTime, construction);
 					if (f) {
-						schoolTeams = schoolTeamService.querySchoolTeams();
-						session.setAttribute("schoolTeams", schoolTeams);
+						teams = teamService.queryTeams();
+						session.setAttribute("teams", teams);
 						map.put("result", "0");
 						map.put("ok", "11");
 					} else {
@@ -167,8 +168,8 @@ public class BingTianXueDiServlet extends HttpServlet {
 					String time=request.getParameter("time");
 					boolean f = competitionService.addCompetition(teamAId, teamBId, rinkId, time, remark,true);
 					if(f){
-						saiShiInfos = saiShiInfoService.getSaiShiInfosGuanFang();
-						session.setAttribute("saiShiInfos", saiShiInfos);
+						matchs = matchService.getAllOfficialCompetitions();
+						session.setAttribute("matchs", matchs);
 						map.put("result", "0");
 						map.put("ok", "12");
 					}else{

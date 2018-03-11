@@ -1,8 +1,8 @@
 $(document).ready(function() {
-		$(".buttonone").click(function() {
+		$(".button1").click(function() {
 			window.location.href = "";
 		});
-		$(".buttontwo").click(function() {
+		$(".button2").click(function() {
 			window.location.href = "qitadenglufangshi.jsp";
 		});
 	});
