@@ -91,7 +91,7 @@ public class UserService {
 			String handlingValue, String userName, String imageUrl, String idNo) {
 		// 查找身份证号是否已经存在
 		String state = "";
-		if (idNo == null) {
+		if (playerService.getPlayerByIdNo(idNo) == null) {
 			Category category = categoryService.queryCategory(categoryValue);// 查询当前类别名称是否在数据库中有对应的项
 			if (category == null) {
 				state = categoryValue + "类别未找到";
@@ -113,8 +113,9 @@ public class UserService {
 			player2.setName(userName);
 			player2.setImage(imageUrl);
 			player2.setIdInfoId(idNo);
-			boolean f = playerService.addPlayer(userId, player2);// 执行插入动作，并返回是否插入成功
-			if (f) {
+			player = playerService.insertNewPlayer(userId, gender, height, weight, category.getCategoryId(),
+					handling.getHandlingId(), userName, imageUrl, idNo);// 执行插入动作，并返回是否插入成功
+			if (player!=null) {
 				state = "创建成功";
 				System.out.println("创建成功");
 			} else {

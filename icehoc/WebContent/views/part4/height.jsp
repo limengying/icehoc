@@ -32,7 +32,7 @@
                     	<img src="../../img/part1/back.png" />
 				    </div>
 					<div class="biaoti">
-						添兵添将
+						添兵添将(身高)
 					</div>
 				</div>
 

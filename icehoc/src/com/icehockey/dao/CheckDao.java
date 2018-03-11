@@ -100,7 +100,37 @@ public class CheckDao {
 	}
 
 	public boolean updateCheckRecord(int id, Check check2) {
-		// TODO Auto-generated method stub
+		try {
+			// 获取数据库链接
+			conn = util.openConnection();
+			String sql1 = "UPDATE check SET checkReslut = " + check2.isCheckReslut() + ", reason = " + check2.getReason()
+					+ " ,checkDate =" + check2.getCheckDate()+ " , userId =" + check2.getUserId() + "WHERE id = " + id;
+			System.out.println("sql1:  " + sql1);
+			// 执行SQL1语句
+			preparedStatement = conn.prepareStatement(sql1);
+			int row1 = preparedStatement.executeUpdate(sql1);
+			if(row1==1){
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			// 关闭Statement
+			try {
+				System.out.println("statement关闭");
+				preparedStatement.close();
+			} catch (Exception e) {
+				System.out.println("statement关闭失败");
+			}
+			// 关闭Connection
+			try {
+				System.out.println("conn关闭");
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("conn关闭失败");
+			}
+		}
 		return false;
 	}
 

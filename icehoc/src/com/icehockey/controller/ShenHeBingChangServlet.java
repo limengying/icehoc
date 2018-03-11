@@ -80,7 +80,7 @@ public class ShenHeBingChangServlet extends HttpServlet {
 					if (request.getParameter("rinkId") != null) {
 						String rinkId =request.getParameter("rinkId");
 						rink = rinkservice.getRinkByRinkId(Integer.parseInt(rinkId));
-						//rinkservice.rinkCheck(user.getUserId(),rink);
+						rinkservice.rinkCheckOK(user.getUserId(),rink.getRinkId());
 						rinks = rinkservice.getRinks();
 						session.setAttribute("rinks", rinks);
 						map.put("rinks", rinks);
@@ -94,7 +94,7 @@ public class ShenHeBingChangServlet extends HttpServlet {
 							String rinkId =request.getParameter("rinkId");
 							rink = rinkservice.getRinkByRinkId(Integer.parseInt(rinkId));
 							rink.setCheckId(0);
-							//rinkservice.resetcheckId(rink);
+						//	rinkservice.resetcheckId(rink);
 							rinks = rinkservice.getRinks();
 							session.setAttribute("rinks", rinks);
 							map.put("rinks", rinks);

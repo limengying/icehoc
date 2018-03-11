@@ -57,7 +57,7 @@ public class RinkService {
 		}
 		if(f){
 			System.out.println("审核成功");
-			check = checkService.getCheckRecord(1, rink.getRinkId());
+			check =checkService.getCheckRecord(1,rink.getRinkId());
 			rinkDao.rinkCheck(rinkId,check.getId());
 		}else{
 			System.out.println("审核失败");

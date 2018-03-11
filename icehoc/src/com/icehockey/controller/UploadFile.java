@@ -44,6 +44,7 @@ public class UploadFile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//借助工具解析commons-fileupload smartupload
 		//判断传递的是否事文件类型
+		System.out.println("------------------Uploda------------------");
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		
 		if(isMultipart)

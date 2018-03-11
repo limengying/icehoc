@@ -12,7 +12,8 @@ $(function() {
 		var touxiang = $("#touxiang").val();
 		var name = $("#name").val();
 		var idnum = $("#idnum").val();
-		
+		alert(touxiang);
+		alert(idnum);
 		if (name == "") {
 			alert("请输入您的真实姓名!");
 			return false;
@@ -22,6 +23,7 @@ $(function() {
 			alert("请输入您的身份证号!");
 			return false;
 		}
+
 		$("#formimgupload").append($("#touxiang"));
 		$("#formimgupload").hide();
 		$("#formimgupload").submit();

@@ -90,7 +90,7 @@ public class PlayerService {
 		return false;
 	}
 
-	public boolean addPlayer(int userId, Player player) {
+	public boolean addPlayer1(int userId, Player player) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 		Date currentDateTime = new Date();
 		System.out.println(df.format(currentDateTime));// new Date()为获取当前系统时间
@@ -117,6 +117,20 @@ public class PlayerService {
 
 	public Player getPlayerByIdNo(String idInfoId) {
 		Player player = playerMapper.getPlayerByIdNo(idInfoId);
+		System.out.println(player+"getPlayerByIdNo");
+		return player;
+	}
+	/**
+	 * 通过userId等参数新建一个player 插入新用户，首先判断前端传入的角色名称，持杆方式名称是否存在，如果都存在，则插入，返回是否插入成功
+	 */
+	public Player insertNewPlayer(int userId, boolean gender, double height, double weight, int categoryId,
+			int handlingId, String userName, String imageUrl, String idNo) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+		Date currentDateTime = new Date();
+		System.out.println(df.format(currentDateTime));// new Date()为获取当前系统时间
+		String dateString = df.format(currentDateTime);
+		Player player = playerMapper.addPlayerCascand(userId, gender, height, weight, categoryId, handlingId, userName, imageUrl,
+				dateString, idNo);
 		return player;
 	}
 }

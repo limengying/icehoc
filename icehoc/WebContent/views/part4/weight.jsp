@@ -24,7 +24,7 @@
 				class="back">
 				<img src="../../img/part1/back.png" />
 			</div>
-			<div class="biaoti">添兵添将</div>
+			<div class="biaoti">添兵添将(体重)</div>
 		</div>
 
 		<div class="text">
@@ -51,7 +51,7 @@
 
 		<div class="btn">
 			<div>
-				<input type="button" data-role='none' value="上一步" class="back1" />
+				<input type="button" data-role='none' value="上一步" class="back1" onClick="javascript :history.back(-1);"/>
 			</div>
 
 			<div>

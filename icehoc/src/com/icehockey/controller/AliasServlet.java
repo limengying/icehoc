@@ -46,7 +46,7 @@ public class AliasServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		PrintWriter writer = response.getWriter();
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("-----------------身高选择后台程序.html----------");
+		System.out.println("-----------------头像选择后台程序.html----------");
 
 		User user = null;
 		Player player =null;

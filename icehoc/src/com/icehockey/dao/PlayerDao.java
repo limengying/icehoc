@@ -22,11 +22,11 @@ public class PlayerDao {
 	private PreparedStatement preparedStatement = null;
 
 	public Player getPlayerByIdNo(String idNo) {
-		String sql = "SELECT * FROM player WHERE idInfoId = ?;";
+		String sql = "SELECT * FROM player WHERE idInfoId = '"+idNo+"';";
+		System.out.println(sql);
 		try {
 			conn = util.openConnection();
 			preparedStatement = conn.prepareStatement(sql);
-			preparedStatement.setString(1, idNo);
 			rs = preparedStatement.executeQuery();
 			if (rs.next()) {
 				int playerId = rs.getInt("playerId"); // 运动员编号
@@ -63,6 +63,7 @@ public class PlayerDao {
 				player = new Player(playerId, name, sex, birthday, height, weight, countryId, cityId, firstLearnAge,
 						roleId, handlingId, idType, idInfoId, categoryId, position, creatMeld, image, modificateDate,
 						remark);
+				System.out.println(player+"ccccccccccccccccccccc");
 			}
 			return player;
 		} catch (SQLException e) {
@@ -86,7 +87,105 @@ public class PlayerDao {
 		}
 		return null;
 	}
+	public int addPlayer(int userId, boolean sex, double height, double weight, int categoryId, int handlingId,
+			String playerName, String imageUrl, String dateString, String idNo) {
+		try {
+			// 获取数据库链接
+			conn = util.openConnection();
+			String sql1 = "INSERT INTO player (player.name,player.sex,player.height,player.weight,player.categoryId, player.handlingId,player.image,player.modificateDate,player.idInfoId,player.creatMeld) "
+					+ "VALUES ('" + playerName + "', " + sex + ", " + height + ", " + weight + ", " + categoryId + ", "
+					+ handlingId + ", '" + imageUrl + "',' " + dateString + "', '" + idNo + "', " + userId + ");";
+			System.out.println("sql1:  " + sql1);
+			// 执行SQL1语句
+			preparedStatement = conn.prepareStatement(sql1);
+			int row1 = preparedStatement.executeUpdate(sql1);
+			System.out.println(row1);
+			return row1;
+		} catch (Exception e) {
+			e.printStackTrace();
 
+		} finally {
+			// 关闭Statement
+			try {
+				System.out.println("statement关闭");
+				preparedStatement.close();
+			} catch (Exception e) {
+				System.out.println("statement关闭失败");
+			}
+			// 关闭Connection
+			try {
+				System.out.println("conn关闭");
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("conn关闭失败");
+			}
+		}
+		return 0;
+	}
+
+	/**
+	 * 通过userId等参数新建一个player 插入新用户，首先判断前端传入的角色名称，持杆方式名称是否存在，如果都存在，则插入，返回是否插入成功
+	 */
+	public Player addPlayerCascand(int userId, boolean sex, double height, double weight, int categoryId,
+			int handlingId, String playerName, String imageUrl, String dateString, String idNo) {
+		int i = addPlayer(userId, sex, height, weight, categoryId, handlingId, playerName, imageUrl, dateString, idNo);
+		if (i == 1) {
+			try {
+				player = getPlayerByIdNo(idNo);
+				// 获取数据库链接
+				conn = util.openConnection();
+				// 开启事务,不把其设置为true之前都是一个当作一个事务来处理
+				conn.setAutoCommit(false);
+
+				String sql2 = "INSERT INTO idinfo ( idinfo.flag, idinfo.playerId, idinfo.idNo ) VALUES (0, "
+						+ player.getPlayerId() + ", '" + idNo + "');";
+				String sql3 = "INSERT INTO userfollowplayer ( userfollowplayer.userId, userfollowplayer.playerId, userfollowplayer.followDate ) VALUES ( "
+						+ userId + ", " + player.getPlayerId() + ", '" + dateString + "' );";
+				System.out.println("sql2:  " + sql2);
+
+				// 执行SQL2语句
+				preparedStatement = conn.prepareStatement(sql2);
+				int row2 = preparedStatement.executeUpdate(sql2);
+				System.out.println(row2);
+
+				// 执行SQL3语句
+				preparedStatement = conn.prepareStatement(sql3);
+
+				int row3 = preparedStatement.executeUpdate(sql3);
+				System.out.println(row3);
+				// 提交事务
+				conn.commit();
+				System.out.println(player);
+				return player;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("有错误！");
+				try {
+					// 回滚事务,撤销上面对事务的所有操作哈！
+					conn.rollback();
+					System.out.println("事物回滚");
+				} catch (Exception e2) {
+					System.out.println("事物回滚失败");
+				}
+			} finally {
+				// 关闭Statement
+				try {
+					System.out.println("statement关闭");
+					preparedStatement.close();
+				} catch (Exception e) {
+					System.out.println("statement关闭失败");
+				}
+				// 关闭Connection
+				try {
+					System.out.println("conn关闭");
+					conn.close();
+				} catch (Exception e) {
+					System.out.println("conn关闭失败");
+				}
+			}
+		}
+		return null;
+	}
 	public List<Player> getAllFollowPlayers(int userId) {
 		players = new ArrayList<Player>();
 		String sql = "SELECT player.* FROM player, userfollowplayer, `user` WHERE player.playerId = userfollowplayer.playerId AND"

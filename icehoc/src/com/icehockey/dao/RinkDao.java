@@ -296,7 +296,7 @@ public class RinkDao {
 		}
 		return null;
 	}
-	public boolean rinkCheck(int userId, int rinkId) {//重置审核标志
+	public boolean rinkCheck(int rinkId, int checkId) {//重置审核标志
 		String sql ="UPDATE rink SET checkId=? WHERE rinkId=?;";
 		try {
 			conn = util.openConnection();
